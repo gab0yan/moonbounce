@@ -1,9 +1,46 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dwprm5sq6rfnl"]
 
-[ext_resource type="Texture2D" path="res://assets/sprites/player/astronaut_idle.png" id="1_astronaut_id"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/astronaut_jump.png" id="2_astronaut_ju"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/astronaut_death.png" id="3_astronaut_de"]
-[ext_resource type="Texture2D" path="res://assets/ui/dash.png" id="4_dash"]
+[ext_resource type="Script" uid="uid://dxoxeg2nns0kj" path="res://scripts/player.gd" id="0_player_script"]
+[ext_resource type="Texture2D" uid="uid://d2w15r54a1ajt" path="res://assets/sprites/player/astronaut_idle.png" id="1_astronaut_id"]
+[ext_resource type="Texture2D" uid="uid://dvfsb3kcwuoxb" path="res://assets/sprites/player/astronaut_jump.png" id="2_astronaut_ju"]
+[ext_resource type="Texture2D" uid="uid://3diqsmxgcq0v" path="res://assets/sprites/player/astronaut_death.png" id="3_astronaut_de"]
+[ext_resource type="Texture2D" uid="uid://dmp7tledkmup5" path="res://assets/ui/dash.png" id="4_dash"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_death0"]
+atlas = ExtResource("3_astronaut_de")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_death1"]
+atlas = ExtResource("3_astronaut_de")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_death2"]
+atlas = ExtResource("3_astronaut_de")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_death3"]
+atlas = ExtResource("3_astronaut_de")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fly0"]
+atlas = ExtResource("2_astronaut_ju")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fly1"]
+atlas = ExtResource("2_astronaut_ju")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fly2"]
+atlas = ExtResource("2_astronaut_ju")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fly3"]
+atlas = ExtResource("2_astronaut_ju")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fly4"]
+atlas = ExtResource("2_astronaut_ju")
+region = Rect2(96, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_idle0"]
 atlas = ExtResource("1_astronaut_id")
@@ -29,44 +66,45 @@ region = Rect2(96, 0, 24, 24)
 atlas = ExtResource("1_astronaut_id")
 region = Rect2(120, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fly0"]
-atlas = ExtResource("2_astronaut_ju")
-region = Rect2(0, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fly1"]
-atlas = ExtResource("2_astronaut_ju")
-region = Rect2(24, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fly2"]
-atlas = ExtResource("2_astronaut_ju")
-region = Rect2(48, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fly3"]
-atlas = ExtResource("2_astronaut_ju")
-region = Rect2(72, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fly4"]
-atlas = ExtResource("2_astronaut_ju")
-region = Rect2(96, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_death0"]
-atlas = ExtResource("3_astronaut_de")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_death1"]
-atlas = ExtResource("3_astronaut_de")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_death2"]
-atlas = ExtResource("3_astronaut_de")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_death3"]
-atlas = ExtResource("3_astronaut_de")
-region = Rect2(96, 0, 32, 32)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_player"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_death0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_death1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_death2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_death3")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly4")
+}],
+"loop": 0,
+"name": &"fly",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_idle0")
@@ -86,69 +124,33 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_idle5")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fly0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fly1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fly2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fly3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fly4")
-}],
-"loop": false,
-"name": &"fly",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_death0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_death1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_death2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_death3")
-}],
-"loop": false,
-"name": &"death",
-"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
 size = Vector2(10, 18)
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=598642628 groups=["player"]]
 collision_layer = 2
 collision_mask = 5
+script = ExtResource("0_player_script")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1395132334]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_player")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=859072861]
 position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_player")
 
-[node name="AimArc" type="Line2D" parent="."]
+[node name="AimArc" type="Line2D" parent="." unique_id=2023157162]
 texture_repeat = 2
 position = Vector2(0, -12)
 width = 2.0
-default_color = Color(1.000, 1.000, 1.000, 0.902)
+default_color = Color(1, 1, 1, 0.902)
 texture = ExtResource("4_dash")
 texture_mode = 1

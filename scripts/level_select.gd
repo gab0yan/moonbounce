@@ -3,10 +3,14 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$BackButton.pressed.connect(_on_back_button_pressed)
+	pass  # Back button is connected in the editor (Node tab > Signals)
 
 
 
 
 func _on_back_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	SceneHistory.go_back()
+
+
+func _on_level_04_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/levels/level_04.tscn")
