@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="11_qqimg"]
 [ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="12_3war2"]
 [ext_resource type="PackedScene" path="res://scenes/ui/out_of_lives.tscn" id="13_amq1l"]
+[ext_resource type="PackedScene" path="res://scenes/entities/drift_zone.tscn" id="21_drift"]
+[ext_resource type="Script" path="res://scripts/tutorial_hint.gd" id="23_hint"]
 
 [node name="Level05" type="Node2D" unique_id=1734164946]
 script = ExtResource("1_tavyg")
@@ -87,12 +89,10 @@ offset_right = 160.0
 offset_bottom = 128.0
 border_color = Color(1, 0.667, 0.157, 1)
 
-[node name="DriftZoneIsland" type="ReferenceRect" parent="Zones" unique_id=74682939]
-offset_left = 128.0
-offset_top = 32.0
-offset_right = 224.0
-offset_bottom = 112.0
-border_color = Color(1, 0.839, 0.4, 1)
+[node name="DriftZoneIsland" parent="Zones" unique_id=74682939 instance=ExtResource("21_drift")]
+position = Vector2(128, 32)
+scale = Vector2(3, 1)
+direction = Vector2(0, -1)
 
 [node name="Checkpoints" type="Node2D" parent="." unique_id=1214535921]
 
@@ -100,6 +100,14 @@ border_color = Color(1, 0.839, 0.4, 1)
 position = Vector2(272, 80)
 
 [node name="Bodies" type="Node2D" parent="." unique_id=1460488217]
+
+[node name="Hints" type="Node2D" parent="."]
+
+[node name="HintUpdraft" type="Node2D" parent="Hints"]
+position = Vector2(4, 40)
+script = ExtResource("23_hint")
+text = "Stand in the updraft to float up. You can launch while floating!"
+width = 116.0
 
 [node name="Spawn" type="Marker2D" parent="." unique_id=650335124]
 position = Vector2(24, 128)

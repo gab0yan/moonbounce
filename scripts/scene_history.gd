@@ -2,6 +2,8 @@ extends Node
 ## Autoload "SceneHistory": remembers which scenes you came from,
 ## so Back buttons can return to the previous scene.
 
+const MAIN_MENU := "res://scenes/main_menu.tscn"
+
 var _history: Array[String] = []
 var _current := ""
 var _going_back := false
@@ -20,7 +22,11 @@ func _remember_first_scene() -> void:
 # Runs automatically after every change_scene_to_file / reload_current_scene.
 func _on_scene_changed() -> void:
 	var new_scene := get_tree().current_scene.scene_file_path
-	if _going_back:
+	if new_scene == MAIN_MENU:
+		# Main menu is the start of everything: forget older screens.
+		_history.clear()
+		_going_back = false
+	elif _going_back:
 		_going_back = false
 	elif new_scene in _history:
 		# Came back to a scene we already visited: cut the loop off.

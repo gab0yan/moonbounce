@@ -115,5 +115,4 @@ offset_right = 66.0
 offset_bottom = 176.0
 text = "Back"
 
-[connection signal="pressed" from="LevelPanel/Grid/Level04" to="." method="_on_level_04_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

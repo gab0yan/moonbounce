@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="10_lesd3"]
 [ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="11_64yx1"]
 [ext_resource type="PackedScene" path="res://scenes/ui/out_of_lives.tscn" id="12_c7h1x"]
+[ext_resource type="PackedScene" path="res://scenes/entities/lift_zone.tscn" id="20_lift"]
+[ext_resource type="Script" path="res://scripts/tutorial_hint.gd" id="23_hint"]
 
 [node name="Level06" type="Node2D" unique_id=1557498664]
 script = ExtResource("1_6vksy")
@@ -74,12 +76,9 @@ offset_right = 112.0
 offset_bottom = 160.0
 border_color = Color(1, 0.667, 0.157, 1)
 
-[node name="LiftZoneWest" type="ReferenceRect" parent="Zones" unique_id=2038840016]
-offset_left = 80.0
-offset_top = 16.0
-offset_right = 112.0
-offset_bottom = 144.0
-border_color = Color(1, 0.839, 0.4, 1)
+[node name="LiftZoneWest" parent="Zones" unique_id=2038840016 instance=ExtResource("20_lift")]
+position = Vector2(80, 16)
+scale = Vector2(1, 1.5)
 
 [node name="Checkpoints" type="Node2D" parent="." unique_id=454895806]
 
@@ -87,6 +86,14 @@ border_color = Color(1, 0.839, 0.4, 1)
 position = Vector2(272, 32)
 
 [node name="Bodies" type="Node2D" parent="." unique_id=265921928]
+
+[node name="Hints" type="Node2D" parent="."]
+
+[node name="HintLift" type="Node2D" parent="Hints"]
+position = Vector2(118, 26)
+script = ExtResource("23_hint")
+text = "The lift carries you up. Launch before you hit the crystals on top!"
+width = 96.0
 
 [node name="Spawn" type="Marker2D" parent="." unique_id=553044803]
 position = Vector2(24, 160)
