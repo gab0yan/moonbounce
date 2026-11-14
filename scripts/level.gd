@@ -43,10 +43,6 @@ func _ready() -> void:
 	player.launched.connect(func(_v): _reset_bounces())
 
 
-# --- Darkness (written with AI assistance) ---
-# A level whose root node has the metadata "dark" = true is pitch black,
-# except for a circle of light around the player ("light_radius", default 44).
-# Dead bodies glow a little, so every death lights up a bit more of the level.
 const MAX_LIGHTS := 24
 const BODY_LIGHT_RADIUS := 18.0
 
@@ -56,7 +52,7 @@ func _setup_darkness() -> void:
 	if not get_meta("dark", false):
 		return
 	var layer := CanvasLayer.new()
-	layer.layer = 4               # above the level, below the HUD (5) and menus (10+)
+	layer.layer = 4
 	add_child(layer)
 	var rect := ColorRect.new()
 	rect.size = MAP_SIZE
@@ -95,10 +91,6 @@ func _update_darkness() -> void:
 	dark_material.set_shader_parameter("lights", lights)
 	dark_material.set_shader_parameter("light_count", count)
 
-
-# --- Level intro card (written with AI assistance) ---
-# Shows "LEVEL 5 / Sidewinder / 4 lives" in the middle of the screen, then fades it out.
-# Afterwards the level info lives in the pause menu (Esc) instead of the HUD.
 func _show_level_intro() -> void:
 	var level_title := "Level %d - %s" % [level_number, get_meta("level_name", "")]
 	level_name_label.visible = false
@@ -143,21 +135,18 @@ func _intro_label(text: String, style: StringName) -> Label:
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return label
 
-
-# --- Map boundaries (written with AI assistance) ---
-# Invisible walls on the left, right and top of the screen so the player can't leave the map.
 const MAP_SIZE := Vector2(320, 180)
 
 func _add_map_boundaries() -> void:
-	_add_wall(Vector2(0, 0), Vector2.RIGHT)               # left edge, pushes right
-	_add_wall(Vector2(MAP_SIZE.x, 0), Vector2.LEFT)       # right edge, pushes left
-	_add_wall(Vector2(0, 0), Vector2.DOWN)                # top edge, pushes down
+	_add_wall(Vector2(0, 0), Vector2.RIGHT)
+	_add_wall(Vector2(MAP_SIZE.x, 0), Vector2.LEFT)
+	_add_wall(Vector2(0, 0), Vector2.DOWN)
 
 
 func _add_wall(pos: Vector2, normal: Vector2) -> void:
 	var wall := StaticBody2D.new()
 	wall.name = "Boundary"
-	wall.collision_layer = 1      # terrain layer, so the player collides with it
+	wall.collision_layer = 1
 	wall.collision_mask = 0
 	var shape := CollisionShape2D.new()
 	var line := WorldBoundaryShape2D.new()
@@ -168,8 +157,6 @@ func _add_wall(pos: Vector2, normal: Vector2) -> void:
 	add_child(wall)
 
 
-# --- "Stuck bouncing?" hint (written with AI assistance) ---
-# After several bounces on bodies in a row, suggest restarting.
 const BOUNCES_BEFORE_HINT := 5
 
 var bounce_count := 0
@@ -198,7 +185,6 @@ func _reset_bounces() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	# standing still or holding a wall means you're not stuck any more
 	if bounce_count > 0 and player.state in [player.State.IDLE, player.State.CLINGING]:
 		_reset_bounces()
 
