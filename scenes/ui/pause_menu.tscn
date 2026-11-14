@@ -1,0 +1,65 @@
+[gd_scene format=3]
+
+[ext_resource type="Theme" path="res://assets/ui/ui_theme.tres" id="1_ui_theme"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 10
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.016, 0.024, 0.055, 0.667)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ui_theme")
+
+[node name="Panel" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+
+[node name="Rows" type="VBoxContainer" parent="Center/Panel"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Center/Panel/Rows"]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Center/Panel/Rows"]
+layout_mode = 2
+theme_type_variation = &"SmallLabel"
+text = "Esc to resume"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="Center/Panel/Rows"]
+layout_mode = 2
+text = "Resume"
+
+[node name="RestartButton" type="Button" parent="Center/Panel/Rows"]
+layout_mode = 2
+text = "Restart level"
+
+[node name="SettingsButton" type="Button" parent="Center/Panel/Rows"]
+layout_mode = 2
+text = "Settings"
+
+[node name="LevelSelectButton" type="Button" parent="Center/Panel/Rows"]
+layout_mode = 2
+text = "Level select"
+
+[node name="MainMenuButton" type="Button" parent="Center/Panel/Rows"]
+layout_mode = 2
+text = "Main menu"

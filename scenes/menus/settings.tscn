@@ -1,0 +1,113 @@
+[gd_scene format=4 uid="uid://cg2tc42w5ar4l"]
+
+[ext_resource type="Theme" path="res://assets/ui/ui_theme.tres" id="1_ui_theme"]
+[ext_resource type="PackedScene" path="res://scenes/ui/space_background.tscn" id="2_space_backgr"]
+[ext_resource type="Script" uid="uid://b7acyoebfbapb" path="res://scenes/menus/settings.gd" id="2_swl1s"]
+[ext_resource type="Texture2D" uid="uid://4b8nns6mm8qk" path="res://assets/props/earth.png" id="3_earth"]
+[ext_resource type="TileSet" path="res://assets/tiles/moon_tileset.tres" id="4_moon_tileset"]
+
+[node name="Settings" type="Control" unique_id=1038290048]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ui_theme")
+script = ExtResource("2_swl1s")
+
+[node name="SpaceBackground" parent="." unique_id=430979596 instance=ExtResource("2_space_backgr")]
+
+[node name="Earth" type="Sprite2D" parent="." unique_id=460499571]
+position = Vector2(270, 12)
+texture = ExtResource("3_earth")
+centered = false
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=1703586349]
+tile_map_data = PackedByteArray("AAAAAAoAAAABAAAAAAABAAoAAAABAAAAAAACAAoAAAABAAAAAAADAAoAAAABAAAAAAAEAAoAAAABAAAAAAAFAAoAAAABAAAAAAAGAAoAAAABAAAAAAAHAAoAAAABAAAAAAAIAAoAAAABAAAAAAAJAAoAAAABAAAAAAAKAAoAAAABAAAAAAALAAoAAAABAAAAAAAMAAoAAAABAAAAAAANAAoAAAABAAAAAAAOAAoAAAABAAAAAAAPAAoAAAABAAAAAAAQAAoAAAABAAAAAAARAAoAAAABAAAAAAASAAoAAAABAAAAAAATAAoAAAABAAAAAAAAAAsAAAAGAAAAAAABAAsAAAABAAEAAAACAAsAAAAHAAAAAAADAAsAAAABAAEAAAAEAAsAAAABAAEAAAAFAAsAAAAHAAEAAAAGAAsAAAABAAEAAAAHAAsAAAAGAAAAAAAIAAsAAAABAAEAAAAJAAsAAAAHAAEAAAAKAAsAAAAEAAAAAAALAAsAAAABAAEAAAAMAAsAAAABAAEAAAANAAsAAAAHAAAAAAAOAAsAAAAHAAAAAAAPAAsAAAABAAEAAAAQAAsAAAAEAAAAAAARAAsAAAABAAEAAAASAAsAAAAHAAEAAAATAAsAAAAHAAAAAAA=")
+tile_set = ExtResource("4_moon_tileset")
+
+[node name="Title" type="Label" parent="." unique_id=361387681]
+layout_mode = 0
+offset_top = 6.0
+offset_right = 320.0
+offset_bottom = 36.0
+theme_type_variation = &"TitleLabel"
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="SettingsPanel" type="PanelContainer" parent="." unique_id=2080097281]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 34.0
+offset_right = 250.0
+offset_bottom = 158.0
+
+[node name="Rows" type="VBoxContainer" parent="SettingsPanel" unique_id=1857590089]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="AudioHeader" type="Label" parent="SettingsPanel/Rows" unique_id=1937402831]
+layout_mode = 2
+theme_type_variation = &"HeaderLabel"
+text = "Audio"
+
+[node name="Grid" type="GridContainer" parent="SettingsPanel/Rows" unique_id=610827042]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 3
+columns = 2
+
+[node name="MusicLabel" type="Label" parent="SettingsPanel/Rows/Grid" unique_id=661625272]
+layout_mode = 2
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsPanel/Rows/Grid" unique_id=672391504]
+custom_minimum_size = Vector2(96, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 80.0
+
+[node name="SfxLabel" type="Label" parent="SettingsPanel/Rows/Grid" unique_id=1495339417]
+layout_mode = 2
+text = "Sound FX"
+
+[node name="SfxSlider" type="HSlider" parent="SettingsPanel/Rows/Grid" unique_id=1109938886]
+custom_minimum_size = Vector2(96, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 80.0
+
+[node name="GameHeader" type="Label" parent="SettingsPanel/Rows" unique_id=901924012]
+layout_mode = 2
+theme_type_variation = &"HeaderLabel"
+text = "Game"
+
+[node name="FullscreenToggle" type="CheckButton" parent="SettingsPanel/Rows" unique_id=1791682376]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Fullscreen"
+
+[node name="ScreenShakeToggle" type="CheckButton" parent="SettingsPanel/Rows" unique_id=713770967]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+button_pressed = true
+text = "Screen shake"
+
+[node name="AimArcToggle" type="CheckButton" parent="SettingsPanel/Rows" unique_id=1933579769]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+button_pressed = true
+text = "Show aim arc"
+
+[node name="BackButton" type="Button" parent="." unique_id=1226515884]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 160.0
+offset_right = 66.0
+offset_bottom = 176.0
+text = "Back"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

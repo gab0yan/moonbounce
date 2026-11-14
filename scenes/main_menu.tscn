@@ -1,0 +1,324 @@
+[gd_scene format=4 uid="uid://b1n6uifeovfca"]
+
+[ext_resource type="Script" uid="uid://cvk1ik0w7e737" path="res://scripts/main_menu.gd" id="1_1ajci"]
+[ext_resource type="Texture2D" uid="uid://bdiylqipvr2sd" path="res://assets/backgrounds/stars.png" id="1_stars"]
+[ext_resource type="Texture2D" uid="uid://4b8nns6mm8qk" path="res://assets/props/earth.png" id="2_earth"]
+[ext_resource type="Texture2D" uid="uid://c4qh5wy5bw7kh" path="res://assets/backgrounds/moon_surface_layer1.png" id="3_layer1"]
+[ext_resource type="Texture2D" uid="uid://o0c8q1s8ekmg" path="res://assets/backgrounds/moon_surface_layer2.png" id="4_layer2"]
+[ext_resource type="Texture2D" uid="uid://cqfy2lga4f2wu" path="res://assets/tiles/moon_tiles.png" id="5_moon"]
+[ext_resource type="Texture2D" uid="uid://tetdm8vw65ef" path="res://assets/hazards/crystal_spikes.png" id="6_spikes"]
+[ext_resource type="Texture2D" uid="uid://xou3pddccd82" path="res://assets/props/antenna_tower.png" id="7_tower"]
+[ext_resource type="Texture2D" uid="uid://bqal3f0xph0oj" path="res://assets/props/exit_capsule.png" id="8_capsule"]
+[ext_resource type="Texture2D" uid="uid://diqt75dq2f0jx" path="res://assets/props/fuel_tank.png" id="9_tank"]
+[ext_resource type="Texture2D" uid="uid://d2kqa2btkpi5i" path="res://assets/sprites/effects/sparkle.png" id="10_sparkle"]
+[ext_resource type="Texture2D" uid="uid://bav1f6ufxrbm8" path="res://assets/sprites/player/astronaut_body.png" id="11_body"]
+[ext_resource type="Texture2D" uid="uid://dvfsb3kcwuoxb" path="res://assets/sprites/player/astronaut_jump.png" id="12_jump"]
+[ext_resource type="Texture2D" uid="uid://dmp7tledkmup5" path="res://assets/ui/dash.png" id="13_dash"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_moon"]
+texture = ExtResource("5_moon")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_moon"]
+sources/0 = SubResource("TileSetAtlasSource_moon")
+
+[sub_resource type="LabelSettings" id="LabelSettings_moon"]
+font_size = 27
+font_color = Color(1, 0.839, 0.4, 1)
+outline_size = 2
+outline_color = Color(0.157, 0.078, 0.118, 1)
+shadow_size = 0
+shadow_color = Color(0.588, 0.235, 0.118, 1)
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bounce"]
+font_size = 27
+font_color = Color(0.757, 0.373, 0.698, 1)
+outline_size = 2
+outline_color = Color(0.118, 0.039, 0.118, 1)
+shadow_size = 0
+shadow_color = Color(0.345, 0.133, 0.314, 1)
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_small"]
+font_size = 8
+font_color = Color(0.51, 0.549, 0.725, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_button"]
+content_margin_left = 20.0
+content_margin_top = 1.0
+content_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_selected"]
+content_margin_left = 20.0
+content_margin_top = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(1, 0.839, 0.4, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pressed"]
+content_margin_left = 20.0
+content_margin_top = 2.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 0.667, 0.157, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Theme" id="Theme_menu"]
+Button/colors/font_color = Color(0.922, 0.941, 1, 1)
+Button/colors/font_focus_color = Color(0.157, 0.078, 0.118, 1)
+Button/colors/font_hover_color = Color(0.157, 0.078, 0.118, 1)
+Button/colors/font_hover_pressed_color = Color(0.157, 0.078, 0.118, 1)
+Button/colors/font_pressed_color = Color(0.157, 0.078, 0.118, 1)
+Button/font_sizes/font_size = 12
+Button/styles/disabled = SubResource("StyleBoxEmpty_button")
+Button/styles/focus = SubResource("StyleBoxFlat_selected")
+Button/styles/hover = SubResource("StyleBoxFlat_selected")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_pressed")
+Button/styles/normal = SubResource("StyleBoxEmpty_button")
+Button/styles/pressed = SubResource("StyleBoxFlat_pressed")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.039, 0.055, 0.118, 0.824)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.275, 0.314, 0.51, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="LabelSettings" id="LabelSettings_hint"]
+font_size = 8
+font_color = Color(0.784, 0.804, 0.902, 1)
+outline_size = 2
+outline_color = Color(0.039, 0.055, 0.118, 1)
+
+[node name="MainMenu" type="Control" unique_id=1307930778]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1ajci")
+
+[node name="Background" type="Node2D" parent="." unique_id=1575396758]
+
+[node name="Sky" type="ColorRect" parent="Background" unique_id=1829657048]
+offset_right = 320.0
+offset_bottom = 180.0
+mouse_filter = 2
+color = Color(0.031, 0.055, 0.11, 1)
+
+[node name="Stars" type="TextureRect" parent="Background" unique_id=884494634]
+offset_right = 320.0
+offset_bottom = 180.0
+mouse_filter = 2
+texture = ExtResource("1_stars")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Earth" type="Sprite2D" parent="Background" unique_id=1453984525]
+position = Vector2(270, 12)
+texture = ExtResource("2_earth")
+centered = false
+
+[node name="FarMountains" type="TextureRect" parent="Background" unique_id=816708810]
+offset_top = 92.0
+offset_right = 320.0
+offset_bottom = 124.0
+mouse_filter = 2
+texture = ExtResource("3_layer1")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Craters" type="TextureRect" parent="Background" unique_id=1781496344]
+offset_top = 118.0
+offset_right = 320.0
+offset_bottom = 150.0
+mouse_filter = 2
+texture = ExtResource("4_layer2")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Scene" type="Node2D" parent="." unique_id=1891979858]
+
+[node name="Ground" type="TileMapLayer" parent="Scene" unique_id=218239066]
+tile_map_data = PackedByteArray("AAAAAAkAAAABAAAAAAAAAAoAAAAFAAAAAAAAAAsAAAAHAAAAAAABAAkAAAABAAAAAAABAAoAAAABAAEAAAABAAsAAAAEAAAAAAACAAkAAAABAAAAAAACAAoAAAABAAEAAAACAAsAAAABAAEAAAADAAkAAAABAAAAAAADAAoAAAABAAEAAAADAAsAAAAHAAAAAAAEAAkAAAABAAAAAAAEAAoAAAABAAEAAAAEAAsAAAABAAEAAAAFAAkAAAABAAAAAAAFAAoAAAAFAAAAAAAFAAsAAAAFAAAAAAAGAAkAAAABAAAAAAAGAAoAAAABAAEAAAAGAAsAAAABAAEAAAAHAAkAAAABAAAAAAAHAAoAAAABAAEAAAAHAAsAAAABAAEAAAAIAAkAAAACAAAAAAAIAAoAAAAEAAAAAAAIAAsAAAAEAAAAAAAJAAoAAAABAAAAAAAJAAsAAAABAAEAAAAKAAoAAAABAAAAAAAKAAsAAAAHAAAAAAALAAoAAAABAAAAAAALAAsAAAABAAEAAAAMAAoAAAABAAAAAAAMAAsAAAABAAEAAAANAAkAAAAAAAAAAAANAAoAAAAHAAAAAAANAAsAAAABAAEAAAAOAAkAAAABAAAAAAAOAAoAAAAGAAAAAAAOAAsAAAAFAAAAAAAPAAkAAAABAAAAAAAPAAoAAAABAAEAAAAPAAsAAAAHAAAAAAAQAAkAAAABAAAAAAAQAAoAAAABAAEAAAAQAAsAAAABAAEAAAARAAgAAAAAAAAAAAARAAkAAAABAAEAAAARAAoAAAABAAEAAAARAAsAAAABAAEAAAASAAgAAAABAAAAAAASAAkAAAABAAEAAAASAAoAAAABAAEAAAASAAsAAAAGAAAAAAATAAgAAAABAAAAAAATAAkAAAABAAEAAAATAAoAAAABAAEAAAATAAsAAAABAAEAAAA=")
+tile_set = SubResource("TileSet_moon")
+
+[node name="CrystalSpikes" type="Sprite2D" parent="Scene" unique_id=157140864]
+position = Vector2(144, 144)
+texture = ExtResource("6_spikes")
+centered = false
+
+[node name="AntennaTower" type="Sprite2D" parent="Scene" unique_id=835577415]
+position = Vector2(224, 96)
+texture = ExtResource("7_tower")
+centered = false
+
+[node name="ExitCapsule" type="Sprite2D" parent="Scene" unique_id=1201748051]
+position = Vector2(266, 96)
+texture = ExtResource("8_capsule")
+centered = false
+
+[node name="Sparkle" type="Sprite2D" parent="Scene" unique_id=1399697226]
+position = Vector2(288, 90)
+texture = ExtResource("10_sparkle")
+centered = false
+hframes = 8
+frame = 2
+
+[node name="FuelTank" type="Sprite2D" parent="Scene" unique_id=197642765]
+position = Vector2(298, 103)
+texture = ExtResource("9_tank")
+centered = false
+
+[node name="Body" type="Sprite2D" parent="Scene" unique_id=1029095768]
+position = Vector2(162, 146)
+texture = ExtResource("11_body")
+centered = false
+
+[node name="BounceTrail" type="Line2D" parent="Scene" unique_id=1382786646]
+texture_repeat = 2
+points = PackedVector2Array(180, 148, 185, 136.5, 190, 125.3, 195, 114.5, 200, 104.4, 205, 95.3, 210, 87.2, 215, 80.3, 220, 74.9, 225, 71, 230, 68.7, 235, 68, 240, 69)
+width = 2.0
+default_color = Color(1, 1, 1, 0.9)
+texture = ExtResource("13_dash")
+texture_mode = 1
+
+[node name="Astronaut" type="Sprite2D" parent="Scene" unique_id=1651660090]
+position = Vector2(244, 70)
+rotation = -0.314
+texture = ExtResource("12_jump")
+hframes = 5
+frame = 1
+
+[node name="UI" type="Control" parent="." unique_id=578186796]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Title" type="HBoxContainer" parent="UI" unique_id=1589816000]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 4.0
+offset_right = 230.0
+offset_bottom = 44.0
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Moon" type="Label" parent="UI/Title" unique_id=897656259]
+layout_mode = 2
+text = "MOON"
+label_settings = SubResource("LabelSettings_moon")
+
+[node name="Bounce" type="Label" parent="UI/Title" unique_id=1851806749]
+layout_mode = 2
+text = "BOUNCE"
+label_settings = SubResource("LabelSettings_bounce")
+
+[node name="Tagline" type="Label" parent="UI" unique_id=1981333965]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 42.0
+offset_right = 200.0
+offset_bottom = 54.0
+text = "fail - fall - bounce back"
+label_settings = SubResource("LabelSettings_small")
+
+[node name="MenuPanel" type="Panel" parent="UI" unique_id=939900775]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 58.0
+offset_right = 122.0
+offset_bottom = 166.0
+theme = SubResource("Theme_menu")
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Buttons" type="VBoxContainer" parent="UI/MenuPanel" unique_id=1256591388]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="UI/MenuPanel/Buttons" unique_id=472312708]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Play"
+alignment = 0
+
+[node name="LevelSelectButton" type="Button" parent="UI/MenuPanel/Buttons" unique_id=833355981]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Level Select"
+alignment = 0
+
+[node name="OptionsButton" type="Button" parent="UI/MenuPanel/Buttons" unique_id=321328300]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Options"
+alignment = 0
+
+[node name="CreditsButton" type="Button" parent="UI/MenuPanel/Buttons" unique_id=1836088215]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Credits"
+alignment = 0
+
+[node name="QuitButton" type="Button" parent="UI/MenuPanel/Buttons" unique_id=10937337]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit"
+alignment = 0
+
+[node name="ControlsHint" type="Label" parent="UI" unique_id=281649201]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 168.0
+offset_right = 250.0
+offset_bottom = 180.0
+text = "Drag to aim  -  release to launch  -  R restarts"
+label_settings = SubResource("LabelSettings_hint")
+horizontal_alignment = 1
+
+[node name="Version" type="Label" parent="UI" unique_id=776784843]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 168.0
+offset_right = 316.0
+offset_bottom = 180.0
+text = "v0.1 jam build"
+label_settings = SubResource("LabelSettings_small")
+horizontal_alignment = 2

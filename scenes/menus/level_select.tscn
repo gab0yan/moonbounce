@@ -1,0 +1,119 @@
+[gd_scene format=4 uid="uid://iwtpjqopviou"]
+
+[ext_resource type="Theme" uid="uid://c6avyywpusyws" path="res://assets/ui/ui_theme.tres" id="1_ui_theme"]
+[ext_resource type="Script" uid="uid://d3c0n4xd6lp8u" path="res://scenes/menus/level_select.gd" id="2_p7c2r"]
+[ext_resource type="PackedScene" path="res://scenes/ui/space_background.tscn" id="2_space_backgr"]
+[ext_resource type="Texture2D" uid="uid://4b8nns6mm8qk" path="res://assets/props/earth.png" id="3_earth"]
+[ext_resource type="TileSet" uid="uid://dhri0b8ao3dfc" path="res://assets/tiles/moon_tileset.tres" id="4_moon_tileset"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_button.tscn" id="5_level_button"]
+
+[node name="LevelSelect" type="Control" unique_id=1109208740]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ui_theme")
+script = ExtResource("2_p7c2r")
+
+[node name="SpaceBackground" parent="." unique_id=1082321753 instance=ExtResource("2_space_backgr")]
+
+[node name="Earth" type="Sprite2D" parent="." unique_id=472168028]
+position = Vector2(270, 12)
+texture = ExtResource("3_earth")
+centered = false
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=1455283428]
+tile_map_data = PackedByteArray("AAAAAAoAAAABAAAAAAABAAoAAAABAAAAAAACAAoAAAABAAAAAAADAAoAAAABAAAAAAAEAAoAAAABAAAAAAAFAAoAAAABAAAAAAAGAAoAAAABAAAAAAAHAAoAAAABAAAAAAAIAAoAAAABAAAAAAAJAAoAAAABAAAAAAAKAAoAAAABAAAAAAALAAoAAAABAAAAAAAMAAoAAAABAAAAAAANAAoAAAABAAAAAAAOAAoAAAABAAAAAAAPAAoAAAABAAAAAAAQAAoAAAABAAAAAAARAAoAAAABAAAAAAASAAoAAAABAAAAAAATAAoAAAABAAAAAAAAAAsAAAAGAAAAAAABAAsAAAABAAEAAAACAAsAAAAHAAAAAAADAAsAAAABAAEAAAAEAAsAAAABAAEAAAAFAAsAAAAHAAEAAAAGAAsAAAABAAEAAAAHAAsAAAAGAAAAAAAIAAsAAAABAAEAAAAJAAsAAAAHAAEAAAAKAAsAAAAEAAAAAAALAAsAAAABAAEAAAAMAAsAAAABAAEAAAANAAsAAAAHAAAAAAAOAAsAAAAHAAAAAAAPAAsAAAABAAEAAAAQAAsAAAAEAAAAAAARAAsAAAABAAEAAAASAAsAAAAHAAEAAAATAAsAAAAHAAAAAAA=")
+tile_set = ExtResource("4_moon_tileset")
+
+[node name="Title" type="Label" parent="." unique_id=1541740433]
+layout_mode = 0
+offset_top = 6.0
+offset_right = 320.0
+offset_bottom = 36.0
+theme_type_variation = &"TitleLabel"
+text = "Select Level"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="." unique_id=1272605067]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 320.0
+offset_bottom = 44.0
+theme_type_variation = &"SmallLabel"
+text = "Collect stars by finishing with lives to spare"
+horizontal_alignment = 1
+
+[node name="LevelPanel" type="PanelContainer" parent="." unique_id=1308190448]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 48.0
+offset_right = 264.0
+offset_bottom = 154.0
+
+[node name="Grid" type="GridContainer" parent="LevelPanel" unique_id=1431571525]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 5
+
+[node name="Level01" parent="LevelPanel/Grid" unique_id=1112542425 instance=ExtResource("5_level_button")]
+layout_mode = 2
+
+[node name="Level02" parent="LevelPanel/Grid" unique_id=644582944 instance=ExtResource("5_level_button")]
+layout_mode = 2
+text = "2"
+
+[node name="Level03" parent="LevelPanel/Grid" unique_id=1814141684 instance=ExtResource("5_level_button")]
+layout_mode = 2
+disabled = true
+text = "3"
+
+[node name="Level04" parent="LevelPanel/Grid" unique_id=2027421804 instance=ExtResource("5_level_button")]
+layout_mode = 2
+disabled = true
+text = "4"
+
+[node name="Level05" parent="LevelPanel/Grid" unique_id=1750587976 instance=ExtResource("5_level_button")]
+layout_mode = 2
+disabled = true
+text = "5"
+
+[node name="Level06" parent="LevelPanel/Grid" unique_id=363469392 instance=ExtResource("5_level_button")]
+layout_mode = 2
+disabled = true
+text = "6"
+
+[node name="Level07" parent="LevelPanel/Grid" unique_id=2143659556 instance=ExtResource("5_level_button")]
+layout_mode = 2
+disabled = true
+text = "7"
+
+[node name="Level08" parent="LevelPanel/Grid" unique_id=201185193 instance=ExtResource("5_level_button")]
+layout_mode = 2
+disabled = true
+text = "8"
+
+[node name="Level09" parent="LevelPanel/Grid" unique_id=2010371814 instance=ExtResource("5_level_button")]
+layout_mode = 2
+disabled = true
+text = "9"
+
+[node name="Level10" parent="LevelPanel/Grid" unique_id=398920041 instance=ExtResource("5_level_button")]
+layout_mode = 2
+disabled = true
+text = "10"
+
+[node name="BackButton" type="Button" parent="." unique_id=254982898]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 160.0
+offset_right = 66.0
+offset_bottom = 176.0
+text = "Back"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

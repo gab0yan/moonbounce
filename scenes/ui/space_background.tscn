@@ -1,0 +1,39 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/backgrounds/stars.png" id="1_stars"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/moon_surface_layer1.png" id="2_moon_surface"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/moon_surface_layer2.png" id="3_moon_surface"]
+
+[node name="SpaceBackground" type="Node2D"]
+
+[node name="Sky" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 192.0
+mouse_filter = 2
+color = Color(0.031, 0.055, 0.110, 1.000)
+
+[node name="Stars" type="TextureRect" parent="."]
+offset_right = 320.0
+offset_bottom = 192.0
+mouse_filter = 2
+texture = ExtResource("1_stars")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="FarMountains" type="TextureRect" parent="."]
+offset_top = 92.0
+offset_right = 320.0
+offset_bottom = 124.0
+mouse_filter = 2
+texture = ExtResource("2_moon_surface")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Craters" type="TextureRect" parent="."]
+offset_top = 118.0
+offset_right = 320.0
+offset_bottom = 150.0
+mouse_filter = 2
+texture = ExtResource("3_moon_surface")
+expand_mode = 1
+stretch_mode = 1
