@@ -110,4 +110,5 @@ offset_right = 66.0
 offset_bottom = 176.0
 text = "Back"
 
+[connection signal="toggled" from="SettingsPanel/Rows/FullscreenToggle" to="." method="_on_fullscreen_toggle_toggled"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
