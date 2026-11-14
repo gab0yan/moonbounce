@@ -14,6 +14,10 @@ config/name="Moonbounce"
 run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
+[autoload]
+
+SceneHistory="*res://scripts/scene_history.gd"
+
 [display]
 
 window/size/viewport_width=320
