@@ -1,106 +1,108 @@
-[gd_scene format=3]
+[gd_scene format=4 uid="uid://behely8cc8atp"]
 
+[ext_resource type="Script" uid="uid://rlhi3e1mt258" path="res://scripts/level.gd" id="1_km0xc"]
 [ext_resource type="PackedScene" path="res://scenes/ui/space_background.tscn" id="1_space_backgr"]
-[ext_resource type="Texture2D" path="res://assets/props/earth.png" id="2_earth"]
-[ext_resource type="Texture2D" path="res://assets/props/antenna_tower.png" id="3_antenna_towe"]
-[ext_resource type="TileSet" path="res://assets/tiles/moon_tileset.tres" id="4_moon_tileset"]
+[ext_resource type="Texture2D" uid="uid://4b8nns6mm8qk" path="res://assets/props/earth.png" id="2_earth"]
+[ext_resource type="Texture2D" uid="uid://xou3pddccd82" path="res://assets/props/antenna_tower.png" id="3_antenna_towe"]
+[ext_resource type="TileSet" uid="uid://dhri0b8ao3dfc" path="res://assets/tiles/moon_tileset.tres" id="4_moon_tileset"]
 [ext_resource type="PackedScene" path="res://scenes/entities/crystal_spike.tscn" id="5_crystal_spik"]
 [ext_resource type="PackedScene" path="res://scenes/entities/landing_pad.tscn" id="6_landing_pad"]
 [ext_resource type="PackedScene" path="res://scenes/entities/exit_capsule.tscn" id="7_exit_capsule"]
-[ext_resource type="PackedScene" path="res://scenes/entities/player.tscn" id="8_player"]
+[ext_resource type="PackedScene" uid="uid://dwprm5sq6rfnl" path="res://scenes/entities/player.tscn" id="8_player"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="9_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="10_pause_menu"]
 [ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="11_level_comple"]
 [ext_resource type="PackedScene" path="res://scenes/ui/out_of_lives.tscn" id="12_out_of_lives"]
 
-[node name="Level02" type="Node2D"]
+[node name="Level02" type="Node2D" unique_id=1741050067]
+script = ExtResource("1_km0xc")
 metadata/level_name = "Crater Hop"
 metadata/lives = 4
 
-[node name="SpaceBackground" parent="." instance=ExtResource("1_space_backgr")]
+[node name="SpaceBackground" parent="." unique_id=1711773915 instance=ExtResource("1_space_backgr")]
 
-[node name="Decor" type="Node2D" parent="."]
+[node name="Decor" type="Node2D" parent="." unique_id=832751561]
 
-[node name="Earth" type="Sprite2D" parent="Decor"]
+[node name="Earth" type="Sprite2D" parent="Decor" unique_id=955993335]
 position = Vector2(8, 18)
 texture = ExtResource("2_earth")
 centered = false
 
-[node name="Decor1" type="Sprite2D" parent="Decor"]
+[node name="Decor1" type="Sprite2D" parent="Decor" unique_id=1946838721]
 position = Vector2(0, 64)
 texture = ExtResource("3_antenna_towe")
 centered = false
 
-[node name="Decor2" type="Sprite2D" parent="Decor"]
+[node name="Decor2" type="Sprite2D" parent="Decor" unique_id=1713171188]
 position = Vector2(208, 32)
 texture = ExtResource("3_antenna_towe")
 centered = false
 
-[node name="Ground" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray(0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 8, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 9, 0, 0, 0, 0, 0, 7, 0, 1, 0, 0, 0, 10, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 11, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4, 0, 1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 5, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 6, 0, 1, 0, 0, 0, 7, 0, 1, 0, 0, 0, 7, 0, 1, 0, 0, 0, 4, 0, 0, 0, 0, 0, 8, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 9, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 10, 0, 1, 0, 0, 0, 7, 0, 0, 0, 0, 0, 11, 0, 1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 3, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 2, 0, 0, 0, 1, 0, 2, 0, 0, 0, 5, 0, 2, 0, 0, 0, 1, 0, 2, 0, 0, 0, 6, 0, 2, 0, 0, 0, 1, 0, 2, 0, 0, 0, 7, 0, 2, 0, 0, 0, 1, 0, 2, 0, 0, 0, 8, 0, 2, 0, 0, 0, 1, 0, 2, 0, 0, 0, 9, 0, 2, 0, 0, 0, 1, 0, 2, 0, 0, 0, 10, 0, 2, 0, 0, 0, 1, 0, 2, 0, 0, 0, 11, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 15, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 17, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 18, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 19, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 15, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 16, 0, 3, 0, 0, 0, 7, 0, 0, 0, 0, 0, 17, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 18, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 0, 19, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 15, 0, 4, 0, 0, 0, 0, 0, 2, 0, 0, 0, 16, 0, 4, 0, 0, 0, 7, 0, 1, 0, 0, 0, 17, 0, 4, 0, 0, 0, 7, 0, 0, 0, 0, 0, 18, 0, 4, 0, 0, 0, 1, 0, 1, 0, 0, 0, 19, 0, 4, 0, 0, 0, 1, 0, 1, 0, 0, 0, 16, 0, 5, 0, 0, 0, 0, 0, 1, 0, 0, 0, 17, 0, 5, 0, 0, 0, 4, 0, 0, 0, 0, 0, 18, 0, 5, 0, 0, 0, 1, 0, 1, 0, 0, 0, 19, 0, 5, 0, 0, 0, 7, 0, 0, 0, 0, 0, 15, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 6, 0, 0, 0, 1, 0, 1, 0, 0, 0, 17, 0, 6, 0, 0, 0, 4, 0, 0, 0, 0, 0, 18, 0, 6, 0, 0, 0, 1, 0, 1, 0, 0, 0, 19, 0, 6, 0, 0, 0, 7, 0, 1, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 3, 0, 7, 0, 0, 0, 2, 0, 0, 0, 0, 0, 15, 0, 7, 0, 0, 0, 0, 0, 1, 0, 0, 0, 16, 0, 7, 0, 0, 0, 1, 0, 1, 0, 0, 0, 17, 0, 7, 0, 0, 0, 5, 0, 0, 0, 0, 0, 18, 0, 7, 0, 0, 0, 7, 0, 0, 0, 0, 0, 19, 0, 7, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 8, 0, 0, 0, 7, 0, 1, 0, 0, 0, 1, 0, 8, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 8, 0, 0, 0, 5, 0, 0, 0, 0, 0, 3, 0, 8, 0, 0, 0, 2, 0, 1, 0, 0, 0, 15, 0, 8, 0, 0, 0, 0, 0, 1, 0, 0, 0, 16, 0, 8, 0, 0, 0, 7, 0, 1, 0, 0, 0, 17, 0, 8, 0, 0, 0, 1, 0, 1, 0, 0, 0, 18, 0, 8, 0, 0, 0, 1, 0, 1, 0, 0, 0, 19, 0, 8, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 6, 0, 0, 0, 0, 0, 1, 0, 9, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 9, 0, 0, 0, 7, 0, 1, 0, 0, 0, 3, 0, 9, 0, 0, 0, 2, 0, 1, 0, 0, 0, 15, 0, 9, 0, 0, 0, 0, 0, 1, 0, 0, 0, 16, 0, 9, 0, 0, 0, 1, 0, 1, 0, 0, 0, 17, 0, 9, 0, 0, 0, 1, 0, 1, 0, 0, 0, 18, 0, 9, 0, 0, 0, 4, 0, 0, 0, 0, 0, 19, 0, 9, 0, 0, 0, 6, 0, 1, 0, 0, 0, 0, 0, 10, 0, 0, 0, 7, 0, 1, 0, 0, 0, 1, 0, 10, 0, 0, 0, 7, 0, 0, 0, 0, 0, 2, 0, 10, 0, 0, 0, 6, 0, 0, 0, 0, 0, 3, 0, 10, 0, 0, 0, 6, 0, 1, 0, 0, 0, 4, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 5, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 7, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 8, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 9, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 10, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 11, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 12, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 13, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 14, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 15, 0, 10, 0, 0, 0, 6, 0, 1, 0, 0, 0, 16, 0, 10, 0, 0, 0, 6, 0, 0, 0, 0, 0, 17, 0, 10, 0, 0, 0, 5, 0, 0, 0, 0, 0, 18, 0, 10, 0, 0, 0, 4, 0, 0, 0, 0, 0, 19, 0, 10, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 11, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 11, 0, 0, 0, 5, 0, 0, 0, 0, 0, 3, 0, 11, 0, 0, 0, 7, 0, 1, 0, 0, 0, 4, 0, 11, 0, 0, 0, 6, 0, 1, 0, 0, 0, 5, 0, 11, 0, 0, 0, 6, 0, 0, 0, 0, 0, 6, 0, 11, 0, 0, 0, 6, 0, 1, 0, 0, 0, 7, 0, 11, 0, 0, 0, 5, 0, 0, 0, 0, 0, 8, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 9, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 10, 0, 11, 0, 0, 0, 7, 0, 1, 0, 0, 0, 11, 0, 11, 0, 0, 0, 7, 0, 0, 0, 0, 0, 12, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 13, 0, 11, 0, 0, 0, 6, 0, 0, 0, 0, 0, 14, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 15, 0, 11, 0, 0, 0, 6, 0, 1, 0, 0, 0, 16, 0, 11, 0, 0, 0, 7, 0, 0, 0, 0, 0, 17, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 18, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 19, 0, 11, 0, 0, 0, 7, 0, 1, 0, 0, 0)
+[node name="Ground" type="TileMapLayer" parent="." unique_id=1828591453]
+tile_map_data = PackedByteArray("AAADAAAAAAAAAAEAAAAEAAAAAAAGAAAAAAAFAAAAAAABAAEAAAAGAAAAAAAHAAAAAAAHAAAAAAABAAEAAAAIAAAAAAABAAEAAAAJAAAAAAAHAAEAAAAKAAAAAAABAAEAAAALAAAAAAACAAEAAAADAAEAAAAAAAEAAAAEAAEAAAAGAAAAAAAFAAEAAAABAAEAAAAGAAEAAAAHAAEAAAAHAAEAAAAEAAAAAAAIAAEAAAABAAEAAAAJAAEAAAABAAEAAAAKAAEAAAAHAAAAAAALAAEAAAACAAEAAAADAAIAAAAAAAIAAAAEAAIAAAABAAIAAAAFAAIAAAABAAIAAAAGAAIAAAABAAIAAAAHAAIAAAABAAIAAAAIAAIAAAABAAIAAAAJAAIAAAABAAIAAAAKAAIAAAABAAIAAAALAAIAAAACAAIAAAAPAAIAAAAAAAAAAAAQAAIAAAABAAAAAAARAAIAAAABAAAAAAASAAIAAAABAAAAAAATAAIAAAABAAAAAAAPAAMAAAAAAAEAAAAQAAMAAAAHAAAAAAARAAMAAAABAAEAAAASAAMAAAAEAAAAAAATAAMAAAABAAEAAAAPAAQAAAAAAAIAAAAQAAQAAAAHAAEAAAARAAQAAAAHAAAAAAASAAQAAAABAAEAAAATAAQAAAABAAEAAAAQAAUAAAAAAAEAAAARAAUAAAAEAAAAAAASAAUAAAABAAEAAAATAAUAAAAHAAAAAAAPAAYAAAAAAAAAAAAQAAYAAAABAAEAAAARAAYAAAAEAAAAAAASAAYAAAABAAEAAAATAAYAAAAHAAEAAAAAAAcAAAABAAAAAAABAAcAAAABAAAAAAACAAcAAAABAAAAAAADAAcAAAACAAAAAAAPAAcAAAAAAAEAAAAQAAcAAAABAAEAAAARAAcAAAAFAAAAAAASAAcAAAAHAAAAAAATAAcAAAABAAEAAAAAAAgAAAAHAAEAAAABAAgAAAABAAEAAAACAAgAAAAFAAAAAAADAAgAAAACAAEAAAAPAAgAAAAAAAEAAAAQAAgAAAAHAAEAAAARAAgAAAABAAEAAAASAAgAAAABAAEAAAATAAgAAAAEAAAAAAAAAAkAAAAGAAAAAAABAAkAAAABAAEAAAACAAkAAAAHAAEAAAADAAkAAAACAAEAAAAPAAkAAAAAAAEAAAAQAAkAAAABAAEAAAARAAkAAAABAAEAAAASAAkAAAAEAAAAAAATAAkAAAAGAAEAAAAAAAoAAAAHAAEAAAABAAoAAAAHAAAAAAACAAoAAAAGAAAAAAADAAoAAAAGAAEAAAAEAAoAAAABAAAAAAAFAAoAAAABAAAAAAAGAAoAAAABAAAAAAAHAAoAAAABAAAAAAAIAAoAAAABAAAAAAAJAAoAAAABAAAAAAAKAAoAAAABAAAAAAALAAoAAAABAAAAAAAMAAoAAAABAAAAAAANAAoAAAABAAAAAAAOAAoAAAABAAAAAAAPAAoAAAAGAAEAAAAQAAoAAAAGAAAAAAARAAoAAAAFAAAAAAASAAoAAAAEAAAAAAATAAoAAAABAAEAAAAAAAsAAAAEAAAAAAABAAsAAAABAAEAAAACAAsAAAAFAAAAAAADAAsAAAAHAAEAAAAEAAsAAAAGAAEAAAAFAAsAAAAGAAAAAAAGAAsAAAAGAAEAAAAHAAsAAAAFAAAAAAAIAAsAAAABAAEAAAAJAAsAAAABAAEAAAAKAAsAAAAHAAEAAAALAAsAAAAHAAAAAAAMAAsAAAABAAEAAAANAAsAAAAGAAAAAAAOAAsAAAABAAEAAAAPAAsAAAAGAAEAAAAQAAsAAAAHAAAAAAARAAsAAAABAAEAAAASAAsAAAABAAEAAAATAAsAAAAHAAEAAAA=")
 tile_set = ExtResource("4_moon_tileset")
 
-[node name="Hazards" type="Node2D" parent="."]
+[node name="Hazards" type="Node2D" parent="." unique_id=238977655]
 
-[node name="Checkpoints" type="Node2D" parent="."]
-
-[node name="LandingPad1" parent="Checkpoints" instance=ExtResource("6_landing_pad")]
-position = Vector2(208, 80)
-
-[node name="CrystalSpike1" parent="Hazards" instance=ExtResource("5_crystal_spik")]
+[node name="CrystalSpike1" parent="Hazards" unique_id=2003703293 instance=ExtResource("5_crystal_spik")]
 position = Vector2(240, 80)
 
-[node name="CrystalSpike2" parent="Hazards" instance=ExtResource("5_crystal_spik")]
+[node name="CrystalSpike2" parent="Hazards" unique_id=1826549566 instance=ExtResource("5_crystal_spik")]
 position = Vector2(64, 144)
 
-[node name="CrystalSpike3" parent="Hazards" instance=ExtResource("5_crystal_spik")]
+[node name="CrystalSpike3" parent="Hazards" unique_id=863646027 instance=ExtResource("5_crystal_spik")]
 position = Vector2(80, 144)
 
-[node name="CrystalSpike4" parent="Hazards" instance=ExtResource("5_crystal_spik")]
+[node name="CrystalSpike4" parent="Hazards" unique_id=1545960149 instance=ExtResource("5_crystal_spik")]
 position = Vector2(96, 144)
 
-[node name="CrystalSpike5" parent="Hazards" instance=ExtResource("5_crystal_spik")]
+[node name="CrystalSpike5" parent="Hazards" unique_id=351742163 instance=ExtResource("5_crystal_spik")]
 position = Vector2(112, 144)
 
-[node name="CrystalSpike6" parent="Hazards" instance=ExtResource("5_crystal_spik")]
+[node name="CrystalSpike6" parent="Hazards" unique_id=1461743543 instance=ExtResource("5_crystal_spik")]
 position = Vector2(128, 144)
 
-[node name="CrystalSpike7" parent="Hazards" instance=ExtResource("5_crystal_spik")]
+[node name="CrystalSpike7" parent="Hazards" unique_id=970256616 instance=ExtResource("5_crystal_spik")]
 position = Vector2(144, 144)
 
-[node name="CrystalSpike8" parent="Hazards" instance=ExtResource("5_crystal_spik")]
+[node name="CrystalSpike8" parent="Hazards" unique_id=1696546473 instance=ExtResource("5_crystal_spik")]
 position = Vector2(160, 144)
 
-[node name="CrystalSpike9" parent="Hazards" instance=ExtResource("5_crystal_spik")]
+[node name="CrystalSpike9" parent="Hazards" unique_id=1411072506 instance=ExtResource("5_crystal_spik")]
 position = Vector2(176, 144)
 
-[node name="CrystalSpike10" parent="Hazards" instance=ExtResource("5_crystal_spik")]
+[node name="CrystalSpike10" parent="Hazards" unique_id=785368084 instance=ExtResource("5_crystal_spik")]
 position = Vector2(192, 144)
 
-[node name="CrystalSpike11" parent="Hazards" instance=ExtResource("5_crystal_spik")]
+[node name="CrystalSpike11" parent="Hazards" unique_id=1223681875 instance=ExtResource("5_crystal_spik")]
 position = Vector2(208, 144)
 
-[node name="CrystalSpike12" parent="Hazards" instance=ExtResource("5_crystal_spik")]
+[node name="CrystalSpike12" parent="Hazards" unique_id=854888717 instance=ExtResource("5_crystal_spik")]
 position = Vector2(224, 144)
 
-[node name="ExitCapsule" parent="." instance=ExtResource("7_exit_capsule")]
+[node name="Checkpoints" type="Node2D" parent="." unique_id=1607304822]
+
+[node name="LandingPad1" parent="Checkpoints" unique_id=535620182 instance=ExtResource("6_landing_pad")]
+position = Vector2(208, 80)
+
+[node name="ExitCapsule" parent="." unique_id=1931851283 instance=ExtResource("7_exit_capsule")]
 position = Vector2(272, 0)
 
-[node name="Bodies" type="Node2D" parent="."]
+[node name="Bodies" type="Node2D" parent="." unique_id=948092633]
 
-[node name="Spawn" type="Marker2D" parent="."]
+[node name="Spawn" type="Marker2D" parent="." unique_id=361942540]
 position = Vector2(24, 112)
 
-[node name="Player" parent="." instance=ExtResource("8_player")]
+[node name="Player" parent="." unique_id=1819160369 instance=ExtResource("8_player")]
 position = Vector2(24, 112)
 
-[node name="HUD" parent="." instance=ExtResource("9_hud")]
+[node name="HUD" parent="." unique_id=558989788 instance=ExtResource("9_hud")]
 
-[node name="PauseMenu" parent="." instance=ExtResource("10_pause_menu")]
+[node name="PauseMenu" parent="." unique_id=254514428 instance=ExtResource("10_pause_menu")]
 visible = false
 
-[node name="LevelComplete" parent="." instance=ExtResource("11_level_comple")]
+[node name="LevelComplete" parent="." unique_id=1418922348 instance=ExtResource("11_level_comple")]
 visible = false
 
-[node name="OutOfLives" parent="." instance=ExtResource("12_out_of_lives")]
+[node name="OutOfLives" parent="." unique_id=1585414128 instance=ExtResource("12_out_of_lives")]
 visible = false
