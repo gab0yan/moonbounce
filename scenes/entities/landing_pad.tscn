@@ -1,21 +1,21 @@
-[gd_scene format=3 uid="uid://dpxqxunymw6ub"]
+[gd_scene format=3 uid="uid://b3rbaaua17hhd"]
 
 [ext_resource type="Texture2D" uid="uid://b4xbsj6s2k6uy" path="res://assets/tiles/landing_pad.png" id="1_landing_pad"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pad"]
 size = Vector2(32, 4)
 
-[node name="LandingPad" type="StaticBody2D" unique_id=667578733 groups=["checkpoints"]]
+[node name="LandingPad" type="StaticBody2D" unique_id=489456288 groups=["checkpoints"]]
 collision_mask = 0
 
-[node name="Sprite" type="Sprite2D" parent="." unique_id=1188431074]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1849080714]
 texture = ExtResource("1_landing_pad")
 centered = false
 
-[node name="Collision" type="CollisionShape2D" parent="." unique_id=847130135]
-position = Vector2(16, 12)
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=831639014]
+position = Vector2(16, 14)
 shape = SubResource("RectangleShape2D_pad")
 one_way_collision = true
 
-[node name="RespawnPoint" type="Marker2D" parent="." unique_id=1154933257]
+[node name="RespawnPoint" type="Marker2D" parent="." unique_id=1300248821]
 position = Vector2(16, 0)
