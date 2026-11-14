@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://iwtpjqopviou"]
 
 [ext_resource type="Theme" uid="uid://c6avyywpusyws" path="res://assets/ui/ui_theme.tres" id="1_ui_theme"]
-[ext_resource type="Script" uid="uid://d3c0n4xd6lp8u" path="res://scenes/menus/level_select.gd" id="2_p7c2r"]
+[ext_resource type="Script" uid="uid://d3c0n4xd6lp8u" path="res://scripts/level_select.gd" id="2_p7c2r"]
 [ext_resource type="PackedScene" path="res://scenes/ui/space_background.tscn" id="2_space_backgr"]
 [ext_resource type="Texture2D" uid="uid://4b8nns6mm8qk" path="res://assets/props/earth.png" id="3_earth"]
 [ext_resource type="TileSet" uid="uid://dhri0b8ao3dfc" path="res://assets/tiles/moon_tileset.tres" id="4_moon_tileset"]

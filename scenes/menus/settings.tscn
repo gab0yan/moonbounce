@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://cg2tc42w5ar4l"]
 
-[ext_resource type="Theme" path="res://assets/ui/ui_theme.tres" id="1_ui_theme"]
+[ext_resource type="Theme" uid="uid://c6avyywpusyws" path="res://assets/ui/ui_theme.tres" id="1_ui_theme"]
 [ext_resource type="PackedScene" path="res://scenes/ui/space_background.tscn" id="2_space_backgr"]
-[ext_resource type="Script" uid="uid://b7acyoebfbapb" path="res://scenes/menus/settings.gd" id="2_swl1s"]
+[ext_resource type="Script" uid="uid://b7acyoebfbapb" path="res://scripts/settings.gd" id="2_swl1s"]
 [ext_resource type="Texture2D" uid="uid://4b8nns6mm8qk" path="res://assets/props/earth.png" id="3_earth"]
-[ext_resource type="TileSet" path="res://assets/tiles/moon_tileset.tres" id="4_moon_tileset"]
+[ext_resource type="TileSet" uid="uid://dhri0b8ao3dfc" path="res://assets/tiles/moon_tileset.tres" id="4_moon_tileset"]
 
 [node name="Settings" type="Control" unique_id=1038290048]
 layout_mode = 3
