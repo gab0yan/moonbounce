@@ -28,7 +28,6 @@ func player_in_range() -> bool:
 func _draw() -> void:
 	var near := player_in_range()
 	var ring := Color(color, 0.85 if near else 0.3)
-	# dashed outer ring, slowly turning
 	var dashes := 28
 	for i in dashes:
 		if i % 2 == 0:
