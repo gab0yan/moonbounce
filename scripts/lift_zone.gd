@@ -8,8 +8,6 @@ extends Area2D
 func _enter_tree() -> void:
 	add_to_group("lift_zones")
 
-
-# AI-assisted: animated arrows + wind streaks on the Glow rectangle show the flow direction.
 func _ready() -> void:
 	var glow := get_node_or_null("Glow") as ColorRect
 	if glow == null:
@@ -25,8 +23,6 @@ func _ready() -> void:
 func flow_direction() -> Vector2:
 	return Vector2.UP
 
-
-# AI-assisted: the player asks the zone how to move, so DriftZone can push other ways.
 func lifts_up() -> bool:
 	return true
 
