@@ -6,6 +6,11 @@ func _ready() -> void:
 	$UI/MenuPanel/Buttons/OptionsButton.pressed.connect(_on_options_pressed)
 	$UI/MenuPanel/Buttons/CreditsButton.pressed.connect(_on_credits_pressed)
 	$UI/MenuPanel/Buttons/QuitButton.pressed.connect(_on_quit_pressed)
+	
+	for button in $UI/MenuPanel/Buttons.get_children():
+		if button is BaseButton:
+			button.mouse_entered.connect(SfxManager.play_click)
+			
 
 func _on_play_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/levels/level_01.tscn")

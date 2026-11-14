@@ -14,8 +14,14 @@ config/name="Moonbounce"
 run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
+[audio]
+buses/default_bus_layout="uid://rmrmuqubj44f"
+
 [autoload]
 
+SettingsManager="*uid://bjpkr5apn6uk2"
+MusicManager="*uid://c2juti52w24mq"
+SfxManager="*uid://7iyle5q24rur"
 SceneHistory="*res://scripts/scene_history.gd"
 
 [display]
