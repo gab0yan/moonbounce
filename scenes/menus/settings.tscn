@@ -63,6 +63,7 @@ layout_mode = 2
 text = "Music"
 
 [node name="MusicSlider" type="HSlider" parent="SettingsPanel/Rows/Grid" unique_id=672391504]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(96, 10)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -74,6 +75,7 @@ layout_mode = 2
 text = "Sound FX"
 
 [node name="SfxSlider" type="HSlider" parent="SettingsPanel/Rows/Grid" unique_id=1109938886]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(96, 10)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -86,17 +88,20 @@ theme_type_variation = &"HeaderLabel"
 text = "Game"
 
 [node name="FullscreenToggle" type="CheckButton" parent="SettingsPanel/Rows" unique_id=1791682376]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "Fullscreen"
 
 [node name="ScreenShakeToggle" type="CheckButton" parent="SettingsPanel/Rows" unique_id=713770967]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 button_pressed = true
 text = "Screen shake"
 
 [node name="AimArcToggle" type="CheckButton" parent="SettingsPanel/Rows" unique_id=1933579769]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 button_pressed = true
