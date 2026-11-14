@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bav1f6ufxrbm8" path="res://assets/sprites/player/astronaut_body.png" id="11_body"]
 [ext_resource type="Texture2D" uid="uid://dvfsb3kcwuoxb" path="res://assets/sprites/player/astronaut_jump.png" id="12_jump"]
 [ext_resource type="Texture2D" uid="uid://dmp7tledkmup5" path="res://assets/ui/dash.png" id="13_dash"]
+[ext_resource type="Script" path="res://scripts/star_field.gd" id="90_star_field"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_moon"]
 texture = ExtResource("5_moon")
@@ -129,13 +130,8 @@ offset_bottom = 180.0
 mouse_filter = 2
 color = Color(0.031, 0.055, 0.11, 1)
 
-[node name="Stars" type="TextureRect" parent="Background" unique_id=884494634]
-offset_right = 320.0
-offset_bottom = 180.0
-mouse_filter = 2
-texture = ExtResource("1_stars")
-expand_mode = 1
-stretch_mode = 1
+[node name="Stars" type="Node2D" parent="Background" unique_id=884494634]
+script = ExtResource("90_star_field")
 
 [node name="Earth" type="Sprite2D" parent="Background" unique_id=1453984525]
 position = Vector2(270, 12)

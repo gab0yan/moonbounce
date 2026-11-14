@@ -10,9 +10,10 @@
 [ext_resource type="PackedScene" path="res://scenes/entities/exit_capsule.tscn" id="7_exit_capsule"]
 [ext_resource type="PackedScene" uid="uid://dwprm5sq6rfnl" path="res://scenes/entities/player.tscn" id="8_player"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="9_hud"]
-[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="10_pause_menu"]
+[ext_resource type="PackedScene" uid="uid://cf2d5n76v4mt7" path="res://scenes/ui/pause_menu.tscn" id="10_pause_menu"]
 [ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="11_level_comple"]
 [ext_resource type="PackedScene" path="res://scenes/ui/out_of_lives.tscn" id="12_out_of_lives"]
+[ext_resource type="Script" uid="uid://bcffj7f4na5oj" path="res://scripts/tutorial_hint.gd" id="23_hint"]
 
 [node name="Level02" type="Node2D" unique_id=1741050067]
 script = ExtResource("1_km0xc")
@@ -86,6 +87,14 @@ position = Vector2(209, 69)
 position = Vector2(283, 15)
 
 [node name="Bodies" type="Node2D" parent="." unique_id=948092633]
+
+[node name="Hints" type="Node2D" parent="." unique_id=1593448754]
+
+[node name="HintCrater" type="Node2D" parent="Hints" unique_id=995495608]
+position = Vector2(72, 52)
+script = ExtResource("23_hint")
+text = "Too far to jump? Leave bodies in the crater and hop across them."
+width = 130.0
 
 [node name="Spawn" type="Marker2D" parent="." unique_id=361942540]
 position = Vector2(24, 112)

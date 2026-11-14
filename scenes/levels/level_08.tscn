@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="10_82nd4"]
 [ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="11_dlex5"]
 [ext_resource type="PackedScene" path="res://scenes/ui/out_of_lives.tscn" id="12_dokr0"]
+[ext_resource type="PackedScene" path="res://scenes/entities/lift_zone.tscn" id="20_lift"]
+[ext_resource type="PackedScene" path="res://scenes/entities/portal.tscn" id="22_portal"]
 
 [node name="Level08" type="Node2D" unique_id=2139344788]
 script = ExtResource("1_llmnb")
@@ -73,28 +75,20 @@ offset_right = 80.0
 offset_bottom = 160.0
 border_color = Color(1, 0.667, 0.157, 1)
 
-[node name="LiftZoneWest" type="ReferenceRect" parent="Zones" unique_id=429966436]
-offset_left = 48.0
-offset_top = 16.0
-offset_right = 80.0
-offset_bottom = 144.0
-border_color = Color(1, 0.839, 0.4, 1)
+[node name="LiftZoneWest" parent="Zones" unique_id=429966436 instance=ExtResource("20_lift")]
+position = Vector2(48, 16)
+scale = Vector2(1, 1.5)
 
 [node name="Portals" type="Node2D" parent="." unique_id=242930663]
 
-[node name="PortalCyanEntry" type="ReferenceRect" parent="Portals" unique_id=1671574706]
-offset_left = 96.0
-offset_top = 32.0
-offset_right = 112.0
-offset_bottom = 64.0
-border_color = Color(0.757, 0.373, 0.698, 1)
+[node name="PortalCyanEntry" parent="Portals" unique_id=1671574706 node_paths=PackedStringArray("target") instance=ExtResource("22_portal")]
+position = Vector2(96, 32)
+target = NodePath("../PortalCyanExit")
+color = Color(0.3, 0.85, 0.95, 1)
 
-[node name="PortalCyanExit" type="ReferenceRect" parent="Portals" unique_id=251088947]
-offset_left = 240.0
-offset_top = 48.0
-offset_right = 256.0
-offset_bottom = 80.0
-border_color = Color(0.757, 0.373, 0.698, 1)
+[node name="PortalCyanExit" parent="Portals" unique_id=251088947 instance=ExtResource("22_portal")]
+position = Vector2(240, 48)
+color = Color(0.3, 0.85, 0.95, 1)
 
 [node name="Checkpoints" type="Node2D" parent="." unique_id=385536679]
 

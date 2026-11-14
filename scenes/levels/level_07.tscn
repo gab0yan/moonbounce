@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="10_g1ox6"]
 [ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="11_83qld"]
 [ext_resource type="PackedScene" path="res://scenes/ui/out_of_lives.tscn" id="12_5mjk2"]
+[ext_resource type="PackedScene" path="res://scenes/entities/portal.tscn" id="22_portal"]
+[ext_resource type="Script" path="res://scripts/tutorial_hint.gd" id="23_hint"]
 
 [node name="Level07" type="Node2D" unique_id=1420061003]
 script = ExtResource("1_ke6ln")
@@ -51,19 +53,14 @@ position = Vector2(192, 144)
 
 [node name="Portals" type="Node2D" parent="." unique_id=845067465]
 
-[node name="PortalAmberEntry" type="ReferenceRect" parent="Portals" unique_id=194939748]
-offset_left = 80.0
-offset_top = 128.0
-offset_right = 96.0
-offset_bottom = 160.0
-border_color = Color(0.757, 0.373, 0.698, 1)
+[node name="PortalAmberEntry" parent="Portals" unique_id=194939748 node_paths=PackedStringArray("target") instance=ExtResource("22_portal")]
+position = Vector2(80, 128)
+target = NodePath("../PortalAmberExit")
+color = Color(1, 0.667, 0.157, 1)
 
-[node name="PortalAmberExit" type="ReferenceRect" parent="Portals" unique_id=125074717]
-offset_left = 160.0
-offset_top = 48.0
-offset_right = 176.0
-offset_bottom = 80.0
-border_color = Color(0.757, 0.373, 0.698, 1)
+[node name="PortalAmberExit" parent="Portals" unique_id=125074717 instance=ExtResource("22_portal")]
+position = Vector2(160, 48)
+color = Color(1, 0.667, 0.157, 1)
 
 [node name="Checkpoints" type="Node2D" parent="." unique_id=1806845960]
 
@@ -71,6 +68,14 @@ border_color = Color(0.757, 0.373, 0.698, 1)
 position = Vector2(272, 48)
 
 [node name="Bodies" type="Node2D" parent="." unique_id=1616141823]
+
+[node name="Hints" type="Node2D" parent="."]
+
+[node name="HintPortal" type="Node2D" parent="Hints"]
+position = Vector2(8, 64)
+script = ExtResource("23_hint")
+text = "Fly into a portal to come out of its twin - with the same speed."
+width = 120.0
 
 [node name="Spawn" type="Marker2D" parent="." unique_id=1143884258]
 position = Vector2(24, 160)

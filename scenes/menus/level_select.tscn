@@ -108,14 +108,4 @@ offset_right = 66.0
 offset_bottom = 176.0
 text = "Back"
 
-[connection signal="pressed" from="LevelPanel/Grid/Level01" to="." method="_on_level_01_pressed"]
-[connection signal="pressed" from="LevelPanel/Grid/Level02" to="." method="_on_level_02_pressed"]
-[connection signal="pressed" from="LevelPanel/Grid/Level03" to="." method="_on_level_03_pressed"]
-[connection signal="pressed" from="LevelPanel/Grid/Level04" to="." method="_on_level_04_pressed"]
-[connection signal="pressed" from="LevelPanel/Grid/Level05" to="." method="_on_level_05_pressed"]
-[connection signal="pressed" from="LevelPanel/Grid/Level06" to="." method="_on_level_06_pressed"]
-[connection signal="pressed" from="LevelPanel/Grid/Level07" to="." method="_on_level_07_pressed"]
-[connection signal="pressed" from="LevelPanel/Grid/Level08" to="." method="_on_level_08_pressed"]
-[connection signal="pressed" from="LevelPanel/Grid/Level09" to="." method="_on_level_09_pressed"]
-[connection signal="pressed" from="LevelPanel/Grid/Level10" to="." method="_on_level_10_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

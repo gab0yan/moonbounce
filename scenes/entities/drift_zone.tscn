@@ -1,0 +1,21 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/drift_zone.gd" id="1_drift"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_drift"]
+size = Vector2(32, 96)
+
+[node name="DriftZone" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_drift")
+
+[node name="Glow" type="ColorRect" parent="."]
+offset_right = 32.0
+offset_bottom = 96.0
+mouse_filter = 2
+color = Color(1, 0.84, 0.4, 0.15)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(16, 48)
+shape = SubResource("RectangleShape2D_drift")
