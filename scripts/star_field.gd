@@ -1,19 +1,15 @@
-# Written with AI assistance (Claude).
-# Fills the sky with the animated star strips from res://stars/stars/.
-# Every strip starts on a random frame, twinkles at a slightly different speed,
-# and is placed a little out of line with its neighbours so the sky looks less tiled.
 extends Node2D
 
-@export var area := Vector2(320, 192)   # how much sky to cover
-@export var fps := 6.0                    # base animation speed
+@export var area := Vector2(320, 192)
+@export var fps := 6.0
 @export var frame_count := 20
 @export var frame_path := "res://stars/stars/stars%d.png"
 
-const TILE := Vector2(112, 16)            # size of one star strip
+const TILE := Vector2(112, 16)
 
 
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS   # keep twinkling in the pause menu
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 	var frames := SpriteFrames.new()
 	frames.set_animation_speed("default", fps)
@@ -29,7 +25,7 @@ func _ready() -> void:
 
 	var y := -TILE.y * 0.5
 	while y < area.y:
-		var x := -rng.randf_range(0.0, TILE.x)        # each row starts at a different spot
+		var x := -rng.randf_range(0.0, TILE.x)
 		while x < area.x:
 			var strip := AnimatedSprite2D.new()
 			strip.sprite_frames = frames
