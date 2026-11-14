@@ -1,0 +1,108 @@
+[gd_scene format=4 uid="uid://n3q5nyq4hkbe"]
+
+[ext_resource type="Script" uid="uid://rlhi3e1mt258" path="res://scripts/level.gd" id="1_tdc43"]
+[ext_resource type="PackedScene" path="res://scenes/ui/space_background.tscn" id="2_03g8n"]
+[ext_resource type="Texture2D" uid="uid://4b8nns6mm8qk" path="res://assets/props/earth.png" id="3_d1lip"]
+[ext_resource type="Texture2D" uid="uid://xou3pddccd82" path="res://assets/props/antenna_tower.png" id="4_o3rdr"]
+[ext_resource type="TileSet" uid="uid://dhri0b8ao3dfc" path="res://assets/tiles/moon_tileset.tres" id="5_lr2mp"]
+[ext_resource type="PackedScene" path="res://scenes/entities/crystal_spike.tscn" id="6_vmerw"]
+[ext_resource type="PackedScene" uid="uid://b3rbaaua17hhd" path="res://scenes/entities/landing_pad.tscn" id="7_x1re1"]
+[ext_resource type="PackedScene" path="res://scenes/entities/exit_capsule.tscn" id="8_sibhc"]
+[ext_resource type="PackedScene" uid="uid://dwprm5sq6rfnl" path="res://scenes/entities/player.tscn" id="9_vdcoq"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="10_fy4m5"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="11_axo1c"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="12_mf6hd"]
+[ext_resource type="PackedScene" path="res://scenes/ui/out_of_lives.tscn" id="13_5q4vb"]
+
+[node name="Level04" type="Node2D" unique_id=1741050067]
+script = ExtResource("1_tdc43")
+metadata/level_name = "Crater Hop"
+metadata/lives = 4
+
+[node name="SpaceBackground" parent="." unique_id=1711773915 instance=ExtResource("2_03g8n")]
+
+[node name="Decor" type="Node2D" parent="." unique_id=832751561]
+
+[node name="Earth" type="Sprite2D" parent="Decor" unique_id=955993335]
+position = Vector2(8, 18)
+texture = ExtResource("3_d1lip")
+centered = false
+
+[node name="Decor1" type="Sprite2D" parent="Decor" unique_id=1946838721]
+position = Vector2(0, 64)
+texture = ExtResource("4_o3rdr")
+centered = false
+
+[node name="Decor2" type="Sprite2D" parent="Decor" unique_id=1713171188]
+position = Vector2(207, 42)
+texture = ExtResource("4_o3rdr")
+centered = false
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=1828591453]
+tile_map_data = PackedByteArray("AAADAAAAAAAAAAEAAAAEAAAAAAAGAAAAAAAFAAAAAAABAAEAAAAGAAAAAAAHAAAAAAAHAAAAAAABAAEAAAAIAAAAAAABAAEAAAAKAAAAAAABAAEAAAALAAAAAAACAAEAAAADAAEAAAAAAAEAAAAEAAEAAAAGAAAAAAAFAAEAAAABAAEAAAAGAAEAAAAHAAEAAAAHAAEAAAAEAAAAAAAIAAEAAAABAAEAAAAJAAEAAAABAAEAAAAKAAEAAAAHAAAAAAALAAEAAAACAAEAAAADAAIAAAAAAAIAAAAEAAIAAAABAAIAAAAFAAIAAAABAAIAAAAGAAIAAAABAAIAAAAHAAIAAAABAAIAAAAIAAIAAAABAAIAAAAJAAIAAAABAAIAAAAKAAIAAAABAAIAAAALAAIAAAACAAIAAAAPAAYAAAADAAAAAAAAAAcAAAABAAAAAAABAAcAAAABAAAAAAACAAcAAAABAAAAAAAPAAcAAAADAAEAAAAAAAgAAAAHAAEAAAABAAgAAAABAAEAAAACAAgAAAAFAAAAAAAPAAgAAAAAAAEAAAAQAAgAAAABAAAAAAARAAgAAAABAAEAAAASAAgAAAABAAAAAAATAAgAAAABAAAAAAAAAAkAAAAGAAAAAAABAAkAAAABAAEAAAACAAkAAAAHAAEAAAADAAkAAAACAAEAAAAPAAkAAAAAAAEAAAAQAAkAAAABAAEAAAARAAkAAAABAAEAAAASAAkAAAAEAAAAAAATAAkAAAAGAAEAAAAAAAoAAAAHAAEAAAABAAoAAAAHAAAAAAACAAoAAAAGAAAAAAADAAoAAAAGAAEAAAAEAAoAAAABAAAAAAAFAAoAAAABAAAAAAAGAAoAAAABAAAAAAAHAAoAAAABAAAAAAAIAAoAAAABAAAAAAAJAAoAAAABAAAAAAAKAAoAAAABAAAAAAALAAoAAAABAAAAAAAMAAoAAAABAAAAAAANAAoAAAABAAAAAAAOAAoAAAABAAAAAAAPAAoAAAAGAAEAAAAQAAoAAAAGAAAAAAARAAoAAAAFAAAAAAASAAoAAAAEAAAAAAATAAoAAAABAAEAAAAAAAsAAAAEAAAAAAABAAsAAAABAAEAAAACAAsAAAAFAAAAAAADAAsAAAAHAAEAAAAEAAsAAAAGAAEAAAAFAAsAAAAGAAAAAAAGAAsAAAAGAAEAAAAHAAsAAAAFAAAAAAAIAAsAAAABAAEAAAAJAAsAAAABAAEAAAAKAAsAAAAHAAEAAAALAAsAAAAHAAAAAAAMAAsAAAABAAEAAAANAAsAAAAGAAAAAAAOAAsAAAABAAEAAAAPAAsAAAAGAAEAAAAQAAsAAAAHAAAAAAARAAsAAAABAAEAAAASAAsAAAABAAEAAAATAAsAAAAHAAEAAAADAAcAAAACAAAAAAADAAgAAAACAAEAAAAHAAQAAAADAAAAAAAHAAYAAAADAAIAAAAHAAUAAAADAAEAAAAJAAAAAAAHAAEAAAARAAcAAAADAAEAAAARAAQAAAADAAEAAAARAAMAAAADAAAAAAARAAUAAAADAAEAAAARAAYAAAADAAEAAAA=")
+tile_set = ExtResource("5_lr2mp")
+
+[node name="Hazards" type="Node2D" parent="." unique_id=238977655]
+
+[node name="CrystalSpike1" parent="Hazards" unique_id=2003703293 instance=ExtResource("6_vmerw")]
+position = Vector2(240, 80)
+
+[node name="CrystalSpike2" parent="Hazards" unique_id=1826549566 instance=ExtResource("6_vmerw")]
+position = Vector2(64, 144)
+
+[node name="CrystalSpike3" parent="Hazards" unique_id=863646027 instance=ExtResource("6_vmerw")]
+position = Vector2(80, 144)
+
+[node name="CrystalSpike4" parent="Hazards" unique_id=1545960149 instance=ExtResource("6_vmerw")]
+position = Vector2(96, 144)
+
+[node name="CrystalSpike5" parent="Hazards" unique_id=351742163 instance=ExtResource("6_vmerw")]
+position = Vector2(112, 144)
+
+[node name="CrystalSpike6" parent="Hazards" unique_id=1461743543 instance=ExtResource("6_vmerw")]
+position = Vector2(128, 144)
+
+[node name="CrystalSpike7" parent="Hazards" unique_id=970256616 instance=ExtResource("6_vmerw")]
+position = Vector2(144, 144)
+
+[node name="CrystalSpike8" parent="Hazards" unique_id=1696546473 instance=ExtResource("6_vmerw")]
+position = Vector2(160, 144)
+
+[node name="CrystalSpike9" parent="Hazards" unique_id=1411072506 instance=ExtResource("6_vmerw")]
+position = Vector2(176, 144)
+
+[node name="CrystalSpike10" parent="Hazards" unique_id=785368084 instance=ExtResource("6_vmerw")]
+position = Vector2(192, 144)
+
+[node name="CrystalSpike11" parent="Hazards" unique_id=1223681875 instance=ExtResource("6_vmerw")]
+position = Vector2(208, 144)
+
+[node name="CrystalSpike12" parent="Hazards" unique_id=854888717 instance=ExtResource("6_vmerw")]
+position = Vector2(224, 144)
+
+[node name="Checkpoints" type="Node2D" parent="." unique_id=1607304822]
+
+[node name="LandingPad1" parent="Checkpoints" unique_id=535620182 instance=ExtResource("7_x1re1")]
+position = Vector2(191, 80)
+
+[node name="ExitCapsule" parent="." unique_id=1931851283 instance=ExtResource("8_sibhc")]
+position = Vector2(288, 96)
+
+[node name="Bodies" type="Node2D" parent="." unique_id=948092633]
+
+[node name="Spawn" type="Marker2D" parent="." unique_id=361942540]
+position = Vector2(24, 112)
+
+[node name="Player" parent="." unique_id=1819160369 instance=ExtResource("9_vdcoq")]
+position = Vector2(24, 112)
+
+[node name="HUD" parent="." unique_id=558989788 instance=ExtResource("10_fy4m5")]
+
+[node name="PauseMenu" parent="." unique_id=254514428 instance=ExtResource("11_axo1c")]
+visible = false
+
+[node name="LevelComplete" parent="." unique_id=1418922348 instance=ExtResource("12_mf6hd")]
+visible = false
+
+[node name="OutOfLives" parent="." unique_id=1585414128 instance=ExtResource("13_5q4vb")]
+visible = false

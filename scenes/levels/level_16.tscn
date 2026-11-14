@@ -1,0 +1,91 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/ui/space_background.tscn" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/props/earth.png" id="3_earth"]
+[ext_resource type="TileSet" path="res://assets/tiles/moon_tileset.tres" id="4_tiles"]
+[ext_resource type="PackedScene" path="res://scenes/entities/crystal_spike.tscn" id="5_spike"]
+[ext_resource type="PackedScene" path="res://scenes/entities/exit_capsule.tscn" id="6_exit"]
+[ext_resource type="PackedScene" path="res://scenes/entities/player.tscn" id="7_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="8_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="9_pause"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="10_complete"]
+[ext_resource type="PackedScene" path="res://scenes/ui/out_of_lives.tscn" id="11_outoflives"]
+[ext_resource type="PackedScene" path="res://scenes/entities/cling_wall.tscn" id="12_cling"]
+[ext_resource type="PackedScene" path="res://scenes/entities/lift_zone.tscn" id="13_lift"]
+[ext_resource type="Script" path="res://scripts/tutorial_hint.gd" id="14_hint"]
+[ext_resource type="PackedScene" path="res://scenes/entities/grapple_point.tscn" id="15_grapple"]
+
+[node name="Level16" type="Node2D"]
+script = ExtResource("1_level")
+metadata/level_name = "Dark Chimney"
+metadata/lives = 7
+metadata/dark = true
+metadata/light_radius = 46.0
+
+[node name="SpaceBackground" parent="." instance=ExtResource("2_bg")]
+
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="Earth" type="Sprite2D" parent="Decor"]
+position = Vector2(260, 100)
+texture = ExtResource("3_earth")
+centered = false
+
+[node name="Ground" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray(0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 7, 0, 0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 8, 0, 0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 9, 0, 0, 0, 0, 0, 2, 0, 3, 0, 0, 0, 6, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 0, 6, 0, 3, 0, 0, 0, 3, 0, 1, 0, 0, 0, 10, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 6, 0, 4, 0, 0, 0, 3, 0, 1, 0, 0, 0, 10, 0, 4, 0, 0, 0, 0, 0, 1, 0, 0, 0, 11, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 12, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 13, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 14, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 15, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 16, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 17, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 18, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 19, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6, 0, 5, 0, 0, 0, 3, 0, 1, 0, 0, 0, 10, 0, 5, 0, 0, 0, 0, 0, 1, 0, 0, 0, 11, 0, 5, 0, 0, 0, 7, 0, 1, 0, 0, 0, 12, 0, 5, 0, 0, 0, 7, 0, 0, 0, 0, 0, 13, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 14, 0, 5, 0, 0, 0, 1, 0, 1, 0, 0, 0, 15, 0, 5, 0, 0, 0, 6, 0, 1, 0, 0, 0, 16, 0, 5, 0, 0, 0, 1, 0, 1, 0, 0, 0, 17, 0, 5, 0, 0, 0, 1, 0, 1, 0, 0, 0, 18, 0, 5, 0, 0, 0, 1, 0, 1, 0, 0, 0, 19, 0, 5, 0, 0, 0, 5, 0, 1, 0, 0, 0, 6, 0, 6, 0, 0, 0, 3, 0, 1, 0, 0, 0, 10, 0, 6, 0, 0, 0, 0, 0, 1, 0, 0, 0, 11, 0, 6, 0, 0, 0, 5, 0, 0, 0, 0, 0, 12, 0, 6, 0, 0, 0, 1, 0, 1, 0, 0, 0, 13, 0, 6, 0, 0, 0, 1, 0, 1, 0, 0, 0, 14, 0, 6, 0, 0, 0, 1, 0, 1, 0, 0, 0, 15, 0, 6, 0, 0, 0, 1, 0, 1, 0, 0, 0, 16, 0, 6, 0, 0, 0, 1, 0, 1, 0, 0, 0, 17, 0, 6, 0, 0, 0, 7, 0, 0, 0, 0, 0, 18, 0, 6, 0, 0, 0, 7, 0, 0, 0, 0, 0, 19, 0, 6, 0, 0, 0, 1, 0, 1, 0, 0, 0, 6, 0, 7, 0, 0, 0, 3, 0, 1, 0, 0, 0, 10, 0, 7, 0, 0, 0, 0, 0, 1, 0, 0, 0, 11, 0, 7, 0, 0, 0, 4, 0, 1, 0, 0, 0, 12, 0, 7, 0, 0, 0, 1, 0, 1, 0, 0, 0, 13, 0, 7, 0, 0, 0, 1, 0, 1, 0, 0, 0, 14, 0, 7, 0, 0, 0, 1, 0, 1, 0, 0, 0, 15, 0, 7, 0, 0, 0, 1, 0, 1, 0, 0, 0, 16, 0, 7, 0, 0, 0, 5, 0, 1, 0, 0, 0, 17, 0, 7, 0, 0, 0, 7, 0, 1, 0, 0, 0, 18, 0, 7, 0, 0, 0, 7, 0, 0, 0, 0, 0, 19, 0, 7, 0, 0, 0, 7, 0, 0, 0, 0, 0, 6, 0, 8, 0, 0, 0, 3, 0, 1, 0, 0, 0, 10, 0, 8, 0, 0, 0, 0, 0, 1, 0, 0, 0, 11, 0, 8, 0, 0, 0, 1, 0, 1, 0, 0, 0, 12, 0, 8, 0, 0, 0, 1, 0, 1, 0, 0, 0, 13, 0, 8, 0, 0, 0, 1, 0, 1, 0, 0, 0, 14, 0, 8, 0, 0, 0, 1, 0, 1, 0, 0, 0, 15, 0, 8, 0, 0, 0, 1, 0, 1, 0, 0, 0, 16, 0, 8, 0, 0, 0, 1, 0, 1, 0, 0, 0, 17, 0, 8, 0, 0, 0, 5, 0, 0, 0, 0, 0, 18, 0, 8, 0, 0, 0, 1, 0, 1, 0, 0, 0, 19, 0, 8, 0, 0, 0, 1, 0, 1, 0, 0, 0, 6, 0, 9, 0, 0, 0, 3, 0, 1, 0, 0, 0, 10, 0, 9, 0, 0, 0, 0, 0, 1, 0, 0, 0, 11, 0, 9, 0, 0, 0, 4, 0, 1, 0, 0, 0, 12, 0, 9, 0, 0, 0, 1, 0, 1, 0, 0, 0, 13, 0, 9, 0, 0, 0, 1, 0, 1, 0, 0, 0, 14, 0, 9, 0, 0, 0, 1, 0, 1, 0, 0, 0, 15, 0, 9, 0, 0, 0, 1, 0, 1, 0, 0, 0, 16, 0, 9, 0, 0, 0, 1, 0, 1, 0, 0, 0, 17, 0, 9, 0, 0, 0, 1, 0, 1, 0, 0, 0, 18, 0, 9, 0, 0, 0, 6, 0, 0, 0, 0, 0, 19, 0, 9, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 3, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 4, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 5, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6, 0, 10, 0, 0, 0, 1, 0, 1, 0, 0, 0, 7, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 8, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 9, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 10, 0, 10, 0, 0, 0, 7, 0, 0, 0, 0, 0, 11, 0, 10, 0, 0, 0, 1, 0, 1, 0, 0, 0, 12, 0, 10, 0, 0, 0, 4, 0, 1, 0, 0, 0, 13, 0, 10, 0, 0, 0, 6, 0, 0, 0, 0, 0, 14, 0, 10, 0, 0, 0, 4, 0, 0, 0, 0, 0, 15, 0, 10, 0, 0, 0, 1, 0, 1, 0, 0, 0, 16, 0, 10, 0, 0, 0, 1, 0, 1, 0, 0, 0, 17, 0, 10, 0, 0, 0, 5, 0, 1, 0, 0, 0, 18, 0, 10, 0, 0, 0, 4, 0, 1, 0, 0, 0, 19, 0, 10, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 11, 0, 0, 0, 4, 0, 0, 0, 0, 0, 3, 0, 11, 0, 0, 0, 6, 0, 1, 0, 0, 0, 4, 0, 11, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5, 0, 11, 0, 0, 0, 4, 0, 1, 0, 0, 0, 6, 0, 11, 0, 0, 0, 7, 0, 0, 0, 0, 0, 7, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 8, 0, 11, 0, 0, 0, 5, 0, 1, 0, 0, 0, 9, 0, 11, 0, 0, 0, 5, 0, 1, 0, 0, 0, 10, 0, 11, 0, 0, 0, 7, 0, 0, 0, 0, 0, 11, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 12, 0, 11, 0, 0, 0, 7, 0, 0, 0, 0, 0, 13, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 14, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 15, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 16, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 17, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 18, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0, 19, 0, 11, 0, 0, 0, 1, 0, 1, 0, 0, 0)
+tile_set = ExtResource("4_tiles")
+
+[node name="Hazards" type="Node2D" parent="."]
+
+[node name="CeilingSpike1" parent="Hazards" instance=ExtResource("5_spike")]
+position = Vector2(128, 32)
+rotation = 3.14159
+
+[node name="CeilingSpike2" parent="Hazards" instance=ExtResource("5_spike")]
+position = Vector2(144, 32)
+rotation = 3.14159
+
+[node name="CeilingSpike3" parent="Hazards" instance=ExtResource("5_spike")]
+position = Vector2(160, 32)
+rotation = 3.14159
+
+[node name="ClingWalls" type="Node2D" parent="."]
+
+[node name="Grip1" parent="ClingWalls" instance=ExtResource("12_cling")]
+position = Vector2(158, 48)
+scale = Vector2(1, 2.33333)
+
+[node name="Grip2" parent="ClingWalls" instance=ExtResource("12_cling")]
+position = Vector2(114, 32)
+scale = Vector2(1, 2.66667)
+
+[node name="Zones" type="Node2D" parent="."]
+
+[node name="GrapplePoints" type="Node2D" parent="."]
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="ExitCapsule" parent="." instance=ExtResource("6_exit")]
+position = Vector2(256, 32)
+
+[node name="Bodies" type="Node2D" parent="."]
+
+[node name="Hints" type="Node2D" parent="."]
+
+[node name="Spawn" type="Marker2D" parent="."]
+position = Vector2(136, 160)
+
+[node name="Player" parent="." instance=ExtResource("7_player")]
+position = Vector2(136, 160)
+
+[node name="HUD" parent="." instance=ExtResource("8_hud")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("9_pause")]
+visible = false
+
+[node name="LevelComplete" parent="." instance=ExtResource("10_complete")]
+visible = false
+
+[node name="OutOfLives" parent="." instance=ExtResource("11_outoflives")]
+visible = false

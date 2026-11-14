@@ -7,3 +7,30 @@ extends Area2D
 
 func _enter_tree() -> void:
 	add_to_group("lift_zones")
+
+
+# AI-assisted: animated arrows + wind streaks on the Glow rectangle show the flow direction.
+func _ready() -> void:
+	var glow := get_node_or_null("Glow") as ColorRect
+	if glow == null:
+		return
+	var mat := ShaderMaterial.new()
+	mat.shader = preload("res://assets/shaders/zone_flow.gdshader")
+	mat.set_shader_parameter("flow_dir", flow_direction())
+	mat.set_shader_parameter("px_size", glow.size * scale.abs())
+	mat.set_shader_parameter("tint", Color(glow.color, 1.0))
+	glow.material = mat
+
+
+func flow_direction() -> Vector2:
+	return Vector2.UP
+
+
+# AI-assisted: the player asks the zone how to move, so DriftZone can push other ways.
+func lifts_up() -> bool:
+	return true
+
+
+func push(v: Vector2, delta: float, _gravity: float) -> Vector2:
+	v.y = move_toward(v.y, -lift_speed, lift_accel * delta)
+	return v

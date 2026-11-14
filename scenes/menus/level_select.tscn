@@ -75,7 +75,6 @@ text = "3"
 
 [node name="Level04" parent="LevelPanel/Grid" unique_id=2027421804 instance=ExtResource("5_level_button")]
 layout_mode = 2
-disabled = true
 text = "4"
 
 [node name="Level05" parent="LevelPanel/Grid" unique_id=1750587976 instance=ExtResource("5_level_button")]

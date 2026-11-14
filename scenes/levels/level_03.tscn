@@ -1,0 +1,83 @@
+[gd_scene format=4 uid="uid://citk7ipl6lvf8"]
+
+[ext_resource type="Script" uid="uid://rlhi3e1mt258" path="res://scripts/level.gd" id="1_iaq7h"]
+[ext_resource type="PackedScene" path="res://scenes/ui/space_background.tscn" id="2_iaubp"]
+[ext_resource type="Texture2D" uid="uid://4b8nns6mm8qk" path="res://assets/props/earth.png" id="3_xunku"]
+[ext_resource type="Texture2D" uid="uid://xou3pddccd82" path="res://assets/props/antenna_tower.png" id="4_j33in"]
+[ext_resource type="Texture2D" uid="uid://diqt75dq2f0jx" path="res://assets/props/fuel_tank.png" id="5_7oqvy"]
+[ext_resource type="TileSet" uid="uid://dhri0b8ao3dfc" path="res://assets/tiles/moon_tileset.tres" id="6_ghs8o"]
+[ext_resource type="PackedScene" path="res://scenes/entities/crystal_spike.tscn" id="7_1uqhn"]
+[ext_resource type="PackedScene" path="res://scenes/entities/exit_capsule.tscn" id="8_kapun"]
+[ext_resource type="PackedScene" uid="uid://dwprm5sq6rfnl" path="res://scenes/entities/player.tscn" id="9_tipwo"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="10_b7kj7"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="11_410tk"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="12_gpenj"]
+[ext_resource type="PackedScene" path="res://scenes/ui/out_of_lives.tscn" id="13_dn1io"]
+[ext_resource type="Script" path="res://scripts/tutorial_hint.gd" id="23_hint"]
+
+[node name="Level03" type="Node2D" unique_id=1700209458]
+script = ExtResource("1_iaq7h")
+metadata/level_name = "Dead Weight"
+metadata/lives = 4
+
+[node name="SpaceBackground" parent="." unique_id=1135114820 instance=ExtResource("2_iaubp")]
+
+[node name="Decor" type="Node2D" parent="." unique_id=1066885207]
+
+[node name="EarthBackdrop" type="Sprite2D" parent="Decor" unique_id=849264898]
+position = Vector2(24, 16)
+texture = ExtResource("3_xunku")
+centered = false
+
+[node name="RelayTowerLeft" type="Sprite2D" parent="Decor" unique_id=16718606]
+position = Vector2(48, 112)
+texture = ExtResource("4_j33in")
+centered = false
+
+[node name="FuelTankPlateau" type="Sprite2D" parent="Decor" unique_id=95311705]
+position = Vector2(192, 71)
+texture = ExtResource("5_7oqvy")
+centered = false
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=520526306]
+tile_map_data = PackedByteArray("AAAKAAYAAAAAAAAAAAALAAYAAAABAAAAAAAMAAYAAAABAAAAAAANAAYAAAABAAAAAAAOAAYAAAABAAAAAAAPAAYAAAABAAAAAAAQAAYAAAABAAAAAAARAAYAAAABAAAAAAASAAYAAAABAAAAAAATAAYAAAABAAAAAAAKAAcAAAAAAAEAAAALAAcAAAABAAEAAAAMAAcAAAAHAAEAAAANAAcAAAAHAAEAAAAOAAcAAAAEAAAAAAAPAAcAAAABAAEAAAAQAAcAAAABAAEAAAARAAcAAAAEAAAAAAASAAcAAAABAAEAAAATAAcAAAABAAEAAAAKAAgAAAAAAAEAAAALAAgAAAAHAAAAAAAMAAgAAAAGAAEAAAANAAgAAAAHAAEAAAAOAAgAAAABAAEAAAAPAAgAAAAGAAAAAAAQAAgAAAABAAEAAAARAAgAAAABAAEAAAASAAgAAAABAAEAAAATAAgAAAAHAAEAAAAKAAkAAAAAAAEAAAALAAkAAAAHAAAAAAAMAAkAAAAEAAAAAAANAAkAAAABAAEAAAAOAAkAAAABAAEAAAAPAAkAAAAGAAEAAAAQAAkAAAAHAAEAAAARAAkAAAAGAAEAAAASAAkAAAABAAEAAAATAAkAAAAFAAAAAAAAAAoAAAABAAAAAAABAAoAAAABAAAAAAACAAoAAAABAAAAAAADAAoAAAABAAAAAAAEAAoAAAABAAAAAAAFAAoAAAABAAAAAAAGAAoAAAABAAAAAAAHAAoAAAABAAAAAAAIAAoAAAABAAAAAAAJAAoAAAABAAAAAAAKAAoAAAABAAEAAAALAAoAAAABAAEAAAAMAAoAAAABAAEAAAANAAoAAAAHAAAAAAAOAAoAAAABAAEAAAAPAAoAAAABAAEAAAAQAAoAAAAHAAEAAAARAAoAAAAEAAAAAAASAAoAAAABAAEAAAATAAoAAAABAAEAAAAAAAsAAAAHAAEAAAABAAsAAAABAAEAAAACAAsAAAABAAEAAAADAAsAAAABAAEAAAAEAAsAAAAEAAAAAAAFAAsAAAAGAAAAAAAGAAsAAAAGAAAAAAAHAAsAAAAFAAAAAAAIAAsAAAABAAEAAAAJAAsAAAABAAEAAAAKAAsAAAABAAEAAAALAAsAAAAGAAAAAAAMAAsAAAABAAEAAAANAAsAAAABAAEAAAAOAAsAAAABAAEAAAAPAAsAAAAGAAEAAAAQAAsAAAABAAEAAAARAAsAAAABAAEAAAASAAsAAAAFAAAAAAATAAsAAAABAAEAAAA=")
+tile_set = ExtResource("6_ghs8o")
+
+[node name="Hazards" type="Node2D" parent="." unique_id=836849995]
+
+[node name="SpikeBodyGate" type="Node2D" parent="Hazards" unique_id=1258815952]
+
+[node name="SpikeCol05" parent="Hazards/SpikeBodyGate" unique_id=409742683 instance=ExtResource("7_1uqhn")]
+position = Vector2(80, 144)
+
+[node name="Checkpoints" type="Node2D" parent="." unique_id=486871168]
+
+[node name="ExitCapsule" parent="." unique_id=1961749712 instance=ExtResource("8_kapun")]
+position = Vector2(240, 64)
+
+[node name="Bodies" type="Node2D" parent="." unique_id=1498859984]
+
+[node name="Hints" type="Node2D" parent="."]
+
+[node name="HintDeadWeight" type="Node2D" parent="Hints"]
+position = Vector2(8, 56)
+script = ExtResource("23_hint")
+text = "Wall too high? Fall on the crystal on purpose - your body becomes a trampoline."
+width = 140.0
+
+[node name="Spawn" type="Marker2D" parent="." unique_id=1807682976]
+position = Vector2(24, 160)
+
+[node name="Player" parent="." unique_id=598642628 instance=ExtResource("9_tipwo")]
+position = Vector2(24, 160)
+
+[node name="HUD" parent="." unique_id=135312574 instance=ExtResource("10_b7kj7")]
+
+[node name="PauseMenu" parent="." unique_id=1142806076 instance=ExtResource("11_410tk")]
+visible = false
+
+[node name="LevelComplete" parent="." unique_id=185391746 instance=ExtResource("12_gpenj")]
+visible = false
+
+[node name="OutOfLives" parent="." unique_id=347639438 instance=ExtResource("13_dn1io")]
+visible = false

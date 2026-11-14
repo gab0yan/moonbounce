@@ -35,11 +35,179 @@ func _ready() -> void:
 	player.died.connect(_on_player_died)
 	exit_capsule.body_entered.connect(_on_exit_body_entered)
 
+	_add_map_boundaries()
+	_add_bounce_hint()
+	_show_level_intro()
+	_setup_darkness()
+	player.bounced.connect(_on_player_bounced)
+	player.launched.connect(func(_v): _reset_bounces())
+
+
+# --- Darkness (written with AI assistance) ---
+# A level whose root node has the metadata "dark" = true is pitch black,
+# except for a circle of light around the player ("light_radius", default 44).
+# Dead bodies glow a little, so every death lights up a bit more of the level.
+const MAX_LIGHTS := 24
+const BODY_LIGHT_RADIUS := 18.0
+
+var dark_material: ShaderMaterial
+
+func _setup_darkness() -> void:
+	if not get_meta("dark", false):
+		return
+	var layer := CanvasLayer.new()
+	layer.layer = 4               # above the level, below the HUD (5) and menus (10+)
+	add_child(layer)
+	var rect := ColorRect.new()
+	rect.size = MAP_SIZE
+	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	dark_material = ShaderMaterial.new()
+	dark_material.shader = preload("res://assets/shaders/darkness.gdshader")
+	rect.material = dark_material
+	layer.add_child(rect)
+	# tutorial texts stay readable above the darkness
+	if has_node("Hints"):
+		var hint_layer := CanvasLayer.new()
+		hint_layer.layer = 5
+		add_child(hint_layer)
+		$Hints.reparent(hint_layer)
+	_update_darkness()
+
+
+func _process(_delta: float) -> void:
+	_update_darkness()
+
+
+func _update_darkness() -> void:
+	if dark_material == null:
+		return
+	var lights := PackedVector3Array()
+	lights.append(Vector3(player.global_position.x, player.global_position.y - 9.0, get_meta("light_radius", 44.0)))
+	for point in get_tree().get_nodes_in_group("grapple_points"):
+		lights.append(Vector3(point.global_position.x, point.global_position.y, 14.0))   # grapple points glow
+	for body in $Bodies.get_children():
+		if lights.size() >= MAX_LIGHTS:
+			break
+		lights.append(Vector3(body.global_position.x, body.global_position.y - 6.0, BODY_LIGHT_RADIUS))
+	var count := lights.size()
+	while lights.size() < MAX_LIGHTS:
+		lights.append(Vector3.ZERO)
+	dark_material.set_shader_parameter("lights", lights)
+	dark_material.set_shader_parameter("light_count", count)
+
+
+# --- Level intro card (written with AI assistance) ---
+# Shows "LEVEL 5 / Sidewinder / 4 lives" in the middle of the screen, then fades it out.
+# Afterwards the level info lives in the pause menu (Esc) instead of the HUD.
+func _show_level_intro() -> void:
+	var level_title := "Level %d - %s" % [level_number, get_meta("level_name", "")]
+	level_name_label.visible = false
+	$PauseMenu.get_node("Center/Panel/Rows/Subtitle").text = level_title
+
+	var card := Control.new()
+	card.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	card.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var band := ColorRect.new()
+	band.color = Color(0.03, 0.04, 0.1, 0.75)
+	band.position = Vector2(0, 62)
+	band.size = Vector2(MAP_SIZE.x, 54)
+	band.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	card.add_child(band)
+
+	var rows := VBoxContainer.new()
+	rows.position = band.position
+	rows.size = band.size
+	rows.alignment = BoxContainer.ALIGNMENT_CENTER
+	rows.add_theme_constant_override("separation", 0)
+	rows.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	card.add_child(rows)
+	rows.add_child(_intro_label("LEVEL %d" % level_number, &"SmallLabel"))
+	rows.add_child(_intro_label(str(get_meta("level_name", "")), &"TitleLabel"))
+	rows.add_child(_intro_label("%d lives" % lives, &"SmallLabel"))
+
+	$HUD/Root.add_child(card)
+	card.modulate.a = 0.0
+	var tween := create_tween()
+	tween.tween_property(card, "modulate:a", 1.0, 0.35)
+	tween.tween_interval(1.5)
+	tween.tween_property(card, "modulate:a", 0.0, 0.7)
+	tween.tween_callback(card.queue_free)
+
+
+func _intro_label(text: String, style: StringName) -> Label:
+	var label := Label.new()
+	label.text = text
+	label.theme_type_variation = style
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	return label
+
+
+# --- Map boundaries (written with AI assistance) ---
+# Invisible walls on the left, right and top of the screen so the player can't leave the map.
+const MAP_SIZE := Vector2(320, 180)
+
+func _add_map_boundaries() -> void:
+	_add_wall(Vector2(0, 0), Vector2.RIGHT)               # left edge, pushes right
+	_add_wall(Vector2(MAP_SIZE.x, 0), Vector2.LEFT)       # right edge, pushes left
+	_add_wall(Vector2(0, 0), Vector2.DOWN)                # top edge, pushes down
+
+
+func _add_wall(pos: Vector2, normal: Vector2) -> void:
+	var wall := StaticBody2D.new()
+	wall.name = "Boundary"
+	wall.collision_layer = 1      # terrain layer, so the player collides with it
+	wall.collision_mask = 0
+	var shape := CollisionShape2D.new()
+	var line := WorldBoundaryShape2D.new()
+	line.normal = normal
+	shape.shape = line
+	wall.add_child(shape)
+	wall.position = pos
+	add_child(wall)
+
+
+# --- "Stuck bouncing?" hint (written with AI assistance) ---
+# After several bounces on bodies in a row, suggest restarting.
+const BOUNCES_BEFORE_HINT := 5
+
+var bounce_count := 0
+var bounce_hint: Label
+
+func _add_bounce_hint() -> void:
+	bounce_hint = Label.new()
+	bounce_hint.text = "Stuck bouncing? Press R to restart"
+	bounce_hint.theme_type_variation = &"SmallLabel"
+	bounce_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	bounce_hint.position = Vector2(0, 24)
+	bounce_hint.size = Vector2(MAP_SIZE.x, 12)
+	bounce_hint.visible = false
+	$HUD/Root.add_child(bounce_hint)
+
+
+func _on_player_bounced() -> void:
+	bounce_count += 1
+	if bounce_count >= BOUNCES_BEFORE_HINT:
+		bounce_hint.visible = true
+
+
+func _reset_bounces() -> void:
+	bounce_count = 0
+	bounce_hint.visible = false
+
+
+func _physics_process(_delta: float) -> void:
+	# standing still or holding a wall means you're not stuck any more
+	if bounce_count > 0 and player.state in [player.State.IDLE, player.State.CLINGING]:
+		_reset_bounces()
+
 func _on_player_died(death_position):
 	var body := BODY_SCENE.instantiate()
 	$Bodies.add_child(body)
 	body.global_position = death_position
 
+	_reset_bounces()
 	lives -= 1
 	_update_lives_label()
 	if lives <= 0:

@@ -1,0 +1,127 @@
+[gd_scene format=4 uid="uid://0rkbgauqv0ea"]
+
+[ext_resource type="Script" uid="uid://rlhi3e1mt258" path="res://scripts/level.gd" id="1_tavyg"]
+[ext_resource type="PackedScene" path="res://scenes/ui/space_background.tscn" id="2_f3k6o"]
+[ext_resource type="Texture2D" uid="uid://4b8nns6mm8qk" path="res://assets/props/earth.png" id="3_27puk"]
+[ext_resource type="Texture2D" uid="uid://xou3pddccd82" path="res://assets/props/antenna_tower.png" id="4_kkx70"]
+[ext_resource type="Texture2D" uid="uid://cy4fr7yv5i13e" path="res://assets/props/solar_panel.png" id="5_6shqt"]
+[ext_resource type="TileSet" uid="uid://dhri0b8ao3dfc" path="res://assets/tiles/moon_tileset.tres" id="6_de7pb"]
+[ext_resource type="PackedScene" path="res://scenes/entities/crystal_spike.tscn" id="7_5j0jk"]
+[ext_resource type="PackedScene" path="res://scenes/entities/exit_capsule.tscn" id="8_vqqq3"]
+[ext_resource type="PackedScene" uid="uid://dwprm5sq6rfnl" path="res://scenes/entities/player.tscn" id="9_nnt6u"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="10_d4rua"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="11_qqimg"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="12_3war2"]
+[ext_resource type="PackedScene" path="res://scenes/ui/out_of_lives.tscn" id="13_amq1l"]
+[ext_resource type="PackedScene" path="res://scenes/entities/drift_zone.tscn" id="21_drift"]
+[ext_resource type="Script" path="res://scripts/tutorial_hint.gd" id="23_hint"]
+
+[node name="Level05" type="Node2D" unique_id=1734164946]
+script = ExtResource("1_tavyg")
+metadata/level_name = "Sidewinder"
+metadata/lives = 4
+
+[node name="SpaceBackground" parent="." unique_id=644759484 instance=ExtResource("2_f3k6o")]
+
+[node name="Decor" type="Node2D" parent="." unique_id=1977443239]
+
+[node name="EarthBackdrop" type="Sprite2D" parent="Decor" unique_id=207582219]
+position = Vector2(150, 14)
+texture = ExtResource("3_27puk")
+centered = false
+
+[node name="RelayTowerStart" type="Sprite2D" parent="Decor" unique_id=1541223066]
+position = Vector2(8, 80)
+texture = ExtResource("4_kkx70")
+centered = false
+
+[node name="SolarPanelEast" type="Sprite2D" parent="Decor" unique_id=327673338]
+position = Vector2(304, 80)
+texture = ExtResource("5_6shqt")
+centered = false
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=1709493896]
+tile_map_data = PackedByteArray("AAAKAAcAAAAAAAAAAAARAAcAAAAAAAAAAAASAAcAAAABAAAAAAATAAcAAAABAAAAAAAAAAgAAAABAAAAAAABAAgAAAABAAAAAAACAAgAAAABAAAAAAADAAgAAAACAAAAAAAIAAgAAAAAAAAAAAAJAAgAAAABAAAAAAAKAAgAAAACAAEAAAARAAgAAAAAAAEAAAASAAgAAAAHAAEAAAATAAgAAAABAAEAAAAAAAkAAAAFAAAAAAABAAkAAAABAAEAAAACAAkAAAABAAEAAAADAAkAAAACAAEAAAAIAAkAAAAAAAEAAAAJAAkAAAABAAEAAAAKAAkAAAACAAEAAAARAAkAAAAAAAEAAAASAAkAAAAEAAAAAAATAAkAAAAHAAAAAAAAAAoAAAABAAEAAAABAAoAAAAGAAEAAAACAAoAAAAHAAAAAAADAAoAAAAEAAAAAAAEAAoAAAABAAAAAAAFAAoAAAABAAAAAAAGAAoAAAABAAAAAAAHAAoAAAABAAAAAAAIAAoAAAAGAAAAAAAJAAoAAAABAAEAAAAKAAoAAAABAAEAAAALAAoAAAABAAAAAAAMAAoAAAABAAAAAAANAAoAAAABAAAAAAAOAAoAAAABAAAAAAAPAAoAAAABAAAAAAAQAAoAAAABAAAAAAARAAoAAAAHAAEAAAASAAoAAAABAAEAAAATAAoAAAABAAEAAAAAAAsAAAABAAEAAAABAAsAAAABAAEAAAACAAsAAAAEAAAAAAADAAsAAAABAAEAAAAEAAsAAAABAAEAAAAFAAsAAAAGAAAAAAAGAAsAAAABAAEAAAAHAAsAAAABAAEAAAAIAAsAAAAHAAAAAAAJAAsAAAAHAAAAAAAKAAsAAAAGAAAAAAALAAsAAAAFAAAAAAAMAAsAAAAGAAEAAAANAAsAAAAHAAAAAAAOAAsAAAABAAEAAAAPAAsAAAABAAEAAAAQAAsAAAAHAAEAAAARAAsAAAABAAEAAAASAAsAAAAGAAEAAAATAAsAAAAGAAAAAAA=")
+tile_set = ExtResource("6_de7pb")
+
+[node name="Hazards" type="Node2D" parent="." unique_id=1920184419]
+
+[node name="SpikePitWest" type="Node2D" parent="Hazards" unique_id=798795034]
+
+[node name="SpikeCol04" parent="Hazards/SpikePitWest" unique_id=1126847435 instance=ExtResource("7_5j0jk")]
+position = Vector2(64, 144)
+
+[node name="SpikeCol05" parent="Hazards/SpikePitWest" unique_id=1929497042 instance=ExtResource("7_5j0jk")]
+position = Vector2(80, 144)
+
+[node name="SpikeCol06" parent="Hazards/SpikePitWest" unique_id=1351990842 instance=ExtResource("7_5j0jk")]
+position = Vector2(96, 144)
+
+[node name="SpikeCol07" parent="Hazards/SpikePitWest" unique_id=495955970 instance=ExtResource("7_5j0jk")]
+position = Vector2(112, 144)
+
+[node name="SpikePitEast" type="Node2D" parent="Hazards" unique_id=1969282602]
+
+[node name="SpikeCol11" parent="Hazards/SpikePitEast" unique_id=135650109 instance=ExtResource("7_5j0jk")]
+position = Vector2(176, 144)
+
+[node name="SpikeCol12" parent="Hazards/SpikePitEast" unique_id=1876417544 instance=ExtResource("7_5j0jk")]
+position = Vector2(192, 144)
+
+[node name="SpikeCol13" parent="Hazards/SpikePitEast" unique_id=461320157 instance=ExtResource("7_5j0jk")]
+position = Vector2(208, 144)
+
+[node name="SpikeCol14" parent="Hazards/SpikePitEast" unique_id=1746940388 instance=ExtResource("7_5j0jk")]
+position = Vector2(224, 144)
+
+[node name="SpikeCol15" parent="Hazards/SpikePitEast" unique_id=2017557960 instance=ExtResource("7_5j0jk")]
+position = Vector2(240, 144)
+
+[node name="SpikeCol16" parent="Hazards/SpikePitEast" unique_id=1162682975 instance=ExtResource("7_5j0jk")]
+position = Vector2(256, 144)
+
+[node name="Zones" type="Node2D" parent="." unique_id=1602510242]
+
+[node name="DriftEmitterIsland" type="ReferenceRect" parent="Zones" unique_id=1073997746]
+offset_left = 128.0
+offset_top = 112.0
+offset_right = 160.0
+offset_bottom = 128.0
+border_color = Color(1, 0.667, 0.157, 1)
+
+[node name="DriftZoneIsland" parent="Zones" unique_id=74682939 instance=ExtResource("21_drift")]
+position = Vector2(128, 32)
+scale = Vector2(3, 1)
+direction = Vector2(0, -1)
+
+[node name="Checkpoints" type="Node2D" parent="." unique_id=1214535921]
+
+[node name="ExitCapsule" parent="." unique_id=1368863444 instance=ExtResource("8_vqqq3")]
+position = Vector2(272, 80)
+
+[node name="Bodies" type="Node2D" parent="." unique_id=1460488217]
+
+[node name="Hints" type="Node2D" parent="."]
+
+[node name="HintUpdraft" type="Node2D" parent="Hints"]
+position = Vector2(4, 40)
+script = ExtResource("23_hint")
+text = "Stand in the updraft to float up. You can launch while floating!"
+width = 116.0
+
+[node name="Spawn" type="Marker2D" parent="." unique_id=650335124]
+position = Vector2(24, 128)
+
+[node name="Player" parent="." unique_id=598642628 instance=ExtResource("9_nnt6u")]
+position = Vector2(24, 128)
+
+[node name="HUD" parent="." unique_id=210757642 instance=ExtResource("10_d4rua")]
+
+[node name="PauseMenu" parent="." unique_id=152161052 instance=ExtResource("11_qqimg")]
+visible = false
+
+[node name="LevelComplete" parent="." unique_id=1521237411 instance=ExtResource("12_3war2")]
+visible = false
+
+[node name="OutOfLives" parent="." unique_id=271520899 instance=ExtResource("13_amq1l")]
+visible = false

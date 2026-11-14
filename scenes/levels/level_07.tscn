@@ -1,0 +1,95 @@
+[gd_scene format=4 uid="uid://dfo2hn2ujlgxi"]
+
+[ext_resource type="Script" uid="uid://rlhi3e1mt258" path="res://scripts/level.gd" id="1_ke6ln"]
+[ext_resource type="PackedScene" path="res://scenes/ui/space_background.tscn" id="2_30ggj"]
+[ext_resource type="Texture2D" uid="uid://4b8nns6mm8qk" path="res://assets/props/earth.png" id="3_ifo3o"]
+[ext_resource type="Texture2D" uid="uid://cy4fr7yv5i13e" path="res://assets/props/solar_panel.png" id="4_18kj7"]
+[ext_resource type="TileSet" uid="uid://dhri0b8ao3dfc" path="res://assets/tiles/moon_tileset.tres" id="5_p8tmb"]
+[ext_resource type="PackedScene" path="res://scenes/entities/crystal_spike.tscn" id="6_bg08u"]
+[ext_resource type="PackedScene" path="res://scenes/entities/exit_capsule.tscn" id="7_3lj0t"]
+[ext_resource type="PackedScene" uid="uid://dwprm5sq6rfnl" path="res://scenes/entities/player.tscn" id="8_f1q3m"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="9_hqi3p"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="10_g1ox6"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="11_83qld"]
+[ext_resource type="PackedScene" path="res://scenes/ui/out_of_lives.tscn" id="12_5mjk2"]
+[ext_resource type="PackedScene" path="res://scenes/entities/portal.tscn" id="22_portal"]
+[ext_resource type="Script" path="res://scripts/tutorial_hint.gd" id="23_hint"]
+
+[node name="Level07" type="Node2D" unique_id=1420061003]
+script = ExtResource("1_ke6ln")
+metadata/level_name = "Mirror Gate"
+metadata/lives = 4
+
+[node name="SpaceBackground" parent="." unique_id=29659967 instance=ExtResource("2_30ggj")]
+
+[node name="Decor" type="Node2D" parent="." unique_id=1538436093]
+
+[node name="EarthBackdrop" type="Sprite2D" parent="Decor" unique_id=446113779]
+position = Vector2(40, 24)
+texture = ExtResource("3_ifo3o")
+centered = false
+
+[node name="SolarPanelLedge" type="Sprite2D" parent="Decor" unique_id=1985385892]
+position = Vector2(216, 48)
+texture = ExtResource("4_18kj7")
+centered = false
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=1677263272]
+tile_map_data = PackedByteArray("AAAIAAAAAAAAAAEAAAAJAAAAAAACAAEAAAAIAAEAAAAAAAEAAAAJAAEAAAACAAEAAAAIAAIAAAAAAAEAAAAJAAIAAAACAAEAAAAIAAMAAAAAAAEAAAAJAAMAAAACAAEAAAAIAAQAAAAAAAEAAAAJAAQAAAACAAEAAAAIAAUAAAAAAAEAAAAJAAUAAAACAAEAAAANAAUAAAAAAAAAAAAOAAUAAAABAAAAAAAPAAUAAAABAAAAAAAQAAUAAAABAAAAAAARAAUAAAABAAAAAAASAAUAAAABAAAAAAATAAUAAAABAAAAAAAIAAYAAAAAAAEAAAAJAAYAAAACAAEAAAANAAYAAAAAAAEAAAAOAAYAAAAGAAEAAAAPAAYAAAABAAEAAAAQAAYAAAABAAEAAAARAAYAAAAGAAEAAAASAAYAAAABAAEAAAATAAYAAAABAAEAAAAIAAcAAAAAAAEAAAAJAAcAAAACAAEAAAANAAcAAAAAAAEAAAAOAAcAAAABAAEAAAAPAAcAAAABAAEAAAAQAAcAAAABAAEAAAARAAcAAAABAAEAAAASAAcAAAABAAEAAAATAAcAAAAEAAAAAAAIAAgAAAAAAAEAAAAJAAgAAAACAAEAAAANAAgAAAAAAAEAAAAOAAgAAAABAAEAAAAPAAgAAAAHAAAAAAAQAAgAAAABAAEAAAARAAgAAAAHAAEAAAASAAgAAAABAAEAAAATAAgAAAAGAAEAAAAIAAkAAAAAAAEAAAAJAAkAAAACAAEAAAANAAkAAAAAAAEAAAAOAAkAAAAHAAAAAAAPAAkAAAABAAEAAAAQAAkAAAABAAEAAAARAAkAAAABAAEAAAASAAkAAAABAAEAAAATAAkAAAAGAAEAAAAAAAoAAAABAAAAAAABAAoAAAABAAAAAAACAAoAAAABAAAAAAADAAoAAAABAAAAAAAEAAoAAAABAAAAAAAFAAoAAAABAAAAAAAGAAoAAAABAAAAAAAHAAoAAAABAAAAAAAIAAoAAAABAAEAAAAJAAoAAAAHAAAAAAAKAAoAAAABAAAAAAALAAoAAAABAAAAAAAMAAoAAAABAAAAAAANAAoAAAABAAEAAAAOAAoAAAAFAAAAAAAPAAoAAAABAAEAAAAQAAoAAAAEAAAAAAARAAoAAAABAAEAAAASAAoAAAAFAAAAAAATAAoAAAAGAAEAAAAAAAsAAAAGAAAAAAABAAsAAAABAAEAAAACAAsAAAAGAAEAAAADAAsAAAAGAAAAAAAEAAsAAAAEAAAAAAAFAAsAAAAEAAAAAAAGAAsAAAAHAAEAAAAHAAsAAAABAAEAAAAIAAsAAAAGAAEAAAAJAAsAAAAHAAEAAAAKAAsAAAABAAEAAAALAAsAAAAGAAEAAAAMAAsAAAABAAEAAAANAAsAAAABAAEAAAAOAAsAAAAEAAAAAAAPAAsAAAAHAAAAAAAQAAsAAAABAAEAAAARAAsAAAAHAAAAAAASAAsAAAAHAAEAAAATAAsAAAAHAAEAAAA=")
+tile_set = ExtResource("5_p8tmb")
+
+[node name="Hazards" type="Node2D" parent="." unique_id=1502836119]
+
+[node name="SpikePitEast" type="Node2D" parent="Hazards" unique_id=347874026]
+
+[node name="SpikeCol10" parent="Hazards/SpikePitEast" unique_id=847006936 instance=ExtResource("6_bg08u")]
+position = Vector2(160, 144)
+
+[node name="SpikeCol11" parent="Hazards/SpikePitEast" unique_id=1580967279 instance=ExtResource("6_bg08u")]
+position = Vector2(176, 144)
+
+[node name="SpikeCol12" parent="Hazards/SpikePitEast" unique_id=1383410640 instance=ExtResource("6_bg08u")]
+position = Vector2(192, 144)
+
+[node name="Portals" type="Node2D" parent="." unique_id=845067465]
+
+[node name="PortalAmberEntry" parent="Portals" unique_id=194939748 node_paths=PackedStringArray("target") instance=ExtResource("22_portal")]
+position = Vector2(80, 128)
+target = NodePath("../PortalAmberExit")
+color = Color(1, 0.667, 0.157, 1)
+
+[node name="PortalAmberExit" parent="Portals" unique_id=125074717 instance=ExtResource("22_portal")]
+position = Vector2(160, 48)
+color = Color(1, 0.667, 0.157, 1)
+
+[node name="Checkpoints" type="Node2D" parent="." unique_id=1806845960]
+
+[node name="ExitCapsule" parent="." unique_id=845226014 instance=ExtResource("7_3lj0t")]
+position = Vector2(272, 48)
+
+[node name="Bodies" type="Node2D" parent="." unique_id=1616141823]
+
+[node name="Hints" type="Node2D" parent="."]
+
+[node name="HintPortal" type="Node2D" parent="Hints"]
+position = Vector2(8, 64)
+script = ExtResource("23_hint")
+text = "Fly into a portal to come out of its twin - with the same speed."
+width = 120.0
+
+[node name="Spawn" type="Marker2D" parent="." unique_id=1143884258]
+position = Vector2(24, 160)
+
+[node name="Player" parent="." unique_id=598642628 instance=ExtResource("8_f1q3m")]
+position = Vector2(24, 160)
+
+[node name="HUD" parent="." unique_id=1485343679 instance=ExtResource("9_hqi3p")]
+
+[node name="PauseMenu" parent="." unique_id=568769093 instance=ExtResource("10_g1ox6")]
+visible = false
+
+[node name="LevelComplete" parent="." unique_id=283508419 instance=ExtResource("11_83qld")]
+visible = false
+
+[node name="OutOfLives" parent="." unique_id=1701164578 instance=ExtResource("12_5mjk2")]
+visible = false

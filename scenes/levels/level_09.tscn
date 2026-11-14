@@ -1,0 +1,143 @@
+[gd_scene format=4 uid="uid://cvdbhwmkyvlvq"]
+
+[ext_resource type="Script" uid="uid://rlhi3e1mt258" path="res://scripts/level.gd" id="1_k1r5j"]
+[ext_resource type="PackedScene" path="res://scenes/ui/space_background.tscn" id="2_6njev"]
+[ext_resource type="Texture2D" uid="uid://4b8nns6mm8qk" path="res://assets/props/earth.png" id="3_iupsi"]
+[ext_resource type="Texture2D" uid="uid://xou3pddccd82" path="res://assets/props/antenna_tower.png" id="4_0ot5m"]
+[ext_resource type="Texture2D" uid="uid://cy4fr7yv5i13e" path="res://assets/props/solar_panel.png" id="5_vuyry"]
+[ext_resource type="TileSet" uid="uid://dhri0b8ao3dfc" path="res://assets/tiles/moon_tileset.tres" id="6_qxsfx"]
+[ext_resource type="PackedScene" path="res://scenes/entities/crystal_spike.tscn" id="7_wuc8d"]
+[ext_resource type="PackedScene" path="res://scenes/entities/exit_capsule.tscn" id="8_0hn2y"]
+[ext_resource type="PackedScene" uid="uid://dwprm5sq6rfnl" path="res://scenes/entities/player.tscn" id="9_s2162"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="10_cb6iw"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="11_tr3hd"]
+[ext_resource type="PackedScene" path="res://scenes/ui/level_complete.tscn" id="12_32bue"]
+[ext_resource type="PackedScene" path="res://scenes/ui/out_of_lives.tscn" id="13_alrhg"]
+[ext_resource type="PackedScene" path="res://scenes/entities/drift_zone.tscn" id="21_drift"]
+[ext_resource type="Script" path="res://scripts/tutorial_hint.gd" id="23_hint"]
+
+[node name="Level09" type="Node2D" unique_id=7331219]
+script = ExtResource("1_k1r5j")
+metadata/level_name = "Crosswind"
+metadata/lives = 4
+
+[node name="SpaceBackground" parent="." unique_id=461360216 instance=ExtResource("2_6njev")]
+
+[node name="Decor" type="Node2D" parent="." unique_id=612209174]
+
+[node name="EarthBackdrop" type="Sprite2D" parent="Decor" unique_id=933846575]
+position = Vector2(140, 12)
+texture = ExtResource("3_iupsi")
+centered = false
+
+[node name="RelayTowerStart" type="Sprite2D" parent="Decor" unique_id=233497251]
+position = Vector2(8, 80)
+texture = ExtResource("4_0ot5m")
+centered = false
+
+[node name="SolarPanelEast" type="Sprite2D" parent="Decor" unique_id=1135238081]
+position = Vector2(304, 96)
+texture = ExtResource("5_vuyry")
+centered = false
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=2109696138]
+tile_map_data = PackedByteArray("AAAAAAgAAAABAAAAAAABAAgAAAABAAAAAAACAAgAAAACAAAAAAAFAAgAAAAAAAAAAAAGAAgAAAACAAAAAAALAAgAAAAAAAAAAAAMAAgAAAACAAAAAAARAAgAAAAAAAAAAAASAAgAAAABAAAAAAATAAgAAAABAAAAAAAAAAkAAAAHAAAAAAABAAkAAAABAAEAAAACAAkAAAACAAEAAAAFAAkAAAAAAAEAAAAGAAkAAAACAAEAAAALAAkAAAAAAAEAAAAMAAkAAAACAAEAAAARAAkAAAAAAAEAAAASAAkAAAABAAEAAAATAAkAAAABAAEAAAAAAAoAAAAGAAEAAAABAAoAAAABAAEAAAACAAoAAAAEAAAAAAADAAoAAAABAAAAAAAEAAoAAAABAAAAAAAFAAoAAAABAAEAAAAGAAoAAAABAAEAAAAHAAoAAAABAAAAAAAIAAoAAAABAAAAAAAJAAoAAAABAAAAAAAKAAoAAAABAAAAAAALAAoAAAABAAEAAAAMAAoAAAAHAAEAAAANAAoAAAABAAAAAAAOAAoAAAABAAAAAAAPAAoAAAABAAAAAAAQAAoAAAABAAAAAAARAAoAAAABAAEAAAASAAoAAAABAAEAAAATAAoAAAAGAAAAAAAAAAsAAAAEAAAAAAABAAsAAAABAAEAAAACAAsAAAAHAAEAAAADAAsAAAABAAEAAAAEAAsAAAAFAAAAAAAFAAsAAAAGAAEAAAAGAAsAAAABAAEAAAAHAAsAAAABAAEAAAAIAAsAAAAGAAEAAAAJAAsAAAAHAAEAAAAKAAsAAAAFAAAAAAALAAsAAAABAAEAAAAMAAsAAAAHAAEAAAANAAsAAAAFAAAAAAAOAAsAAAAEAAAAAAAPAAsAAAABAAEAAAAQAAsAAAABAAEAAAARAAsAAAABAAEAAAASAAsAAAAFAAAAAAATAAsAAAAHAAEAAAA=")
+tile_set = ExtResource("6_qxsfx")
+
+[node name="Hazards" type="Node2D" parent="." unique_id=2013698938]
+
+[node name="SpikePitWest" type="Node2D" parent="Hazards" unique_id=886626048]
+
+[node name="SpikeCol03" parent="Hazards/SpikePitWest" unique_id=1815721223 instance=ExtResource("7_wuc8d")]
+position = Vector2(48, 144)
+
+[node name="SpikeCol04" parent="Hazards/SpikePitWest" unique_id=551577373 instance=ExtResource("7_wuc8d")]
+position = Vector2(64, 144)
+
+[node name="SpikePitMid" type="Node2D" parent="Hazards" unique_id=119625491]
+
+[node name="SpikeCol07" parent="Hazards/SpikePitMid" unique_id=321584999 instance=ExtResource("7_wuc8d")]
+position = Vector2(112, 144)
+
+[node name="SpikeCol08" parent="Hazards/SpikePitMid" unique_id=697043527 instance=ExtResource("7_wuc8d")]
+position = Vector2(128, 144)
+
+[node name="SpikeCol09" parent="Hazards/SpikePitMid" unique_id=489952642 instance=ExtResource("7_wuc8d")]
+position = Vector2(144, 144)
+
+[node name="SpikeCol10" parent="Hazards/SpikePitMid" unique_id=1096739577 instance=ExtResource("7_wuc8d")]
+position = Vector2(160, 144)
+
+[node name="SpikePitEast" type="Node2D" parent="Hazards" unique_id=642198679]
+
+[node name="SpikeCol13" parent="Hazards/SpikePitEast" unique_id=1155782580 instance=ExtResource("7_wuc8d")]
+position = Vector2(208, 144)
+
+[node name="SpikeCol14" parent="Hazards/SpikePitEast" unique_id=209733470 instance=ExtResource("7_wuc8d")]
+position = Vector2(224, 144)
+
+[node name="SpikeCol15" parent="Hazards/SpikePitEast" unique_id=1889784324 instance=ExtResource("7_wuc8d")]
+position = Vector2(240, 144)
+
+[node name="SpikeCol16" parent="Hazards/SpikePitEast" unique_id=1340237797 instance=ExtResource("7_wuc8d")]
+position = Vector2(256, 144)
+
+[node name="Zones" type="Node2D" parent="." unique_id=631877554]
+
+[node name="DriftEmitterWindward" type="ReferenceRect" parent="Zones" unique_id=1955625523]
+offset_left = 80.0
+offset_top = 112.0
+offset_right = 112.0
+offset_bottom = 128.0
+border_color = Color(1, 0.667, 0.157, 1)
+
+[node name="DriftEmitterHeadwind" type="ReferenceRect" parent="Zones" unique_id=1280373841]
+offset_left = 176.0
+offset_top = 112.0
+offset_right = 208.0
+offset_bottom = 128.0
+border_color = Color(1, 0.667, 0.157, 1)
+
+[node name="DriftZoneWindward" parent="Zones" unique_id=1241637176 instance=ExtResource("21_drift")]
+position = Vector2(80, 32)
+scale = Vector2(2.5, 0.729167)
+direction = Vector2(1, 0)
+lift_accel = 200.0
+
+[node name="DriftZoneHeadwind" parent="Zones" unique_id=1599744358 instance=ExtResource("21_drift")]
+position = Vector2(160, 32)
+scale = Vector2(2.5, 0.729167)
+direction = Vector2(-1, 0)
+lift_accel = 200.0
+
+[node name="Checkpoints" type="Node2D" parent="." unique_id=740815053]
+
+[node name="ExitCapsule" parent="." unique_id=51071058 instance=ExtResource("8_0hn2y")]
+position = Vector2(272, 96)
+
+[node name="Bodies" type="Node2D" parent="." unique_id=1285258670]
+
+[node name="Hints" type="Node2D" parent="."]
+
+[node name="HintWind" type="Node2D" parent="Hints"]
+position = Vector2(4, 52)
+script = ExtResource("23_hint")
+text = "Wind pushes you while you fly. Follow the arrows!"
+width = 76.0
+
+[node name="Spawn" type="Marker2D" parent="." unique_id=802986020]
+position = Vector2(24, 128)
+
+[node name="Player" parent="." unique_id=598642628 instance=ExtResource("9_s2162")]
+position = Vector2(24, 128)
+
+[node name="HUD" parent="." unique_id=1603277410 instance=ExtResource("10_cb6iw")]
+
+[node name="PauseMenu" parent="." unique_id=694931600 instance=ExtResource("11_tr3hd")]
+visible = false
+
+[node name="LevelComplete" parent="." unique_id=554331583 instance=ExtResource("12_32bue")]
+visible = false
+
+[node name="OutOfLives" parent="." unique_id=471449154 instance=ExtResource("13_alrhg")]
+visible = false
