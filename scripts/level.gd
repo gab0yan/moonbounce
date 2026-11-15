@@ -15,6 +15,7 @@ var finished := false
 
 func _update_lives_label() -> void:
 	lives_label.text = str(lives)
+	_sync_life_icons()
 	
 
 
@@ -50,6 +51,8 @@ func _ready() -> void:
 	if not has_meta("round") and Story.should_play(level_number):
 		Cutscene.play(get_tree(), Story.logs_for(level_number), "LOG %02d" % level_number)
 	player.launched.connect(func(_v): _reset_bounces())
+	_build_life_icons()
+	_fade_controls_hint()
 
 
 const MAX_LIGHTS := 24
@@ -193,6 +196,7 @@ func _reset_bounces() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	_elapsed += _delta
 	if bounce_count > 0 and player.state in [player.State.IDLE, player.State.CLINGING]:
 		_reset_bounces()
 	var dead: bool = player.state == player.State.DEAD
@@ -207,11 +211,14 @@ func _on_player_died(death_position):
 	body.global_position = death_position
 
 	_reset_bounces()
+	_deaths += 1
 	lives -= 1
 	_update_lives_label()
 	if lives <= 0:
 		out_of_lives.visible = true
 		get_tree().paused = true
+		_pop_panel(out_of_lives)
+		UiFx.focus_first_in(out_of_lives)
 
 
 func _on_exit_body_entered(body):
@@ -219,12 +226,14 @@ func _on_exit_body_entered(body):
 		return
 	finished = true
 	_on_level_finished()
-	level_complete.get_node("Center/Panel/Rows/LivesLeftLabel").text = "Lives left: %d" % lives
-	var stars := level_complete.get_node("Center/Panel/Rows/Stars").get_children()
-	for i in stars.size():
-		stars[i].self_modulate.a = 1.0 if i < lives else 0.25
+	var rows := level_complete.get_node("Center/Panel/Rows")
+	rows.get_node("LivesLeftLabel").text = "Lives %d   -   Deaths %d   -   %s" % [lives, _deaths, _format_time(_elapsed)]
+	rows.get_node("Subtitle").text = _finish_line()
 	level_complete.visible = true
 	get_tree().paused = true
+	_pop_panel(level_complete)
+	_animate_stars(rows.get_node("Stars").get_children(), mini(lives, 3))
+	UiFx.focus_first_in(level_complete)
 
 func _restart() -> void:
 	get_tree().paused = false
@@ -320,3 +329,85 @@ func _set_shake(offset: Vector2) -> void:
 func _exit_tree() -> void:
 	if is_inside_tree():
 		_set_shake(Vector2.ZERO)
+
+
+const LIFE_ICON_SIZE := Vector2(11, 11)
+
+var _deaths := 0
+var _elapsed := 0.0
+var _life_template: TextureRect
+var _life_icons: Array = []
+
+
+func _build_life_icons() -> void:
+	var row := $HUD/Root/Lives
+	row.get_node("Times").visible = false
+	lives_label.visible = false
+	_life_template = row.get_node("LifeIcon")
+	_life_template.visible = false
+	_sync_life_icons()
+
+
+func _sync_life_icons() -> void:
+	if _life_template == null:
+		return
+	var row := $HUD/Root/Lives
+	while _life_icons.size() < maxi(lives, 0):
+		var icon: TextureRect = _life_template.duplicate()
+		icon.visible = true
+		icon.custom_minimum_size = LIFE_ICON_SIZE
+		icon.pivot_offset = LIFE_ICON_SIZE * 0.5
+		row.add_child(icon)
+		_life_icons.append(icon)
+	while _life_icons.size() > maxi(lives, 0):
+		var lost: TextureRect = _life_icons.pop_back()
+		var t := lost.create_tween().set_parallel()
+		t.tween_property(lost, "scale", Vector2(2.0, 2.0), 0.35).set_ease(Tween.EASE_OUT)
+		t.tween_property(lost, "modulate", Color(1.0, 0.4, 0.4, 0.0), 0.35)
+		t.chain().tween_callback(lost.queue_free)
+
+
+func _fade_controls_hint() -> void:
+	var hint: Control = $HUD/Root/Hints
+	var t := hint.create_tween()
+	t.tween_interval(6.0)
+	t.tween_property(hint, "modulate:a", 0.3, 1.2)
+
+
+func _pop_panel(layer: CanvasLayer) -> void:
+	var panel: Control = layer.get_node("Center/Panel")
+	panel.pivot_offset = panel.size * 0.5
+	panel.scale = Vector2(0.85, 0.85)
+	panel.modulate.a = 0.0
+	var t := layer.create_tween().set_parallel()
+	t.tween_property(panel, "scale", Vector2.ONE, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	t.tween_property(panel, "modulate:a", 1.0, 0.2)
+
+
+func _animate_stars(stars: Array, earned: int) -> void:
+	var t := level_complete.create_tween()
+	for i in stars.size():
+		var star: TextureRect = stars[i]
+		star.pivot_offset = star.size * 0.5
+		star.scale = Vector2.ZERO
+		star.self_modulate.a = 1.0 if i < earned else 0.25
+	t.tween_interval(0.25)
+	for i in stars.size():
+		var star: TextureRect = stars[i]
+		if i < earned:
+			t.tween_callback(SfxManager.play_click)
+		t.tween_property(star, "scale", Vector2(1.35, 1.35), 0.12).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		t.tween_property(star, "scale", Vector2.ONE, 0.1)
+
+
+func _finish_line() -> String:
+	if _deaths == 0:
+		return "Flawless. Not a single fall."
+	if _deaths >= 3:
+		return "Fell %d times. Bounced back every time." % _deaths
+	return "You bounced back."
+
+
+func _format_time(seconds: float) -> String:
+	var total := int(seconds)
+	return "%d:%02d" % [total / 60, total % 60]

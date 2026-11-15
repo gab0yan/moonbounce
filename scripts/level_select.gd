@@ -2,10 +2,13 @@ extends Control
 
 
 const PAGE_SIZE := 10
-const PAGE_SUBTITLES := [
-	"Collect stars by finishing with lives to spare",
-	"Page 2: grip walls, darkness - and lots of dying",
+const CHAPTERS := [
+	"Chapter 1  -  Crater Fields",
+	"Chapter 2  -  The Echo",
 ]
+const DONE_TINT := Color(0.75, 1.0, 0.82)
+
+static var _names := {}
 
 static var page := 0
 
@@ -20,6 +23,9 @@ func _ready() -> void:
 	for i in _buttons.size():
 		_buttons[i].pressed.connect(_on_level_button_pressed.bind(i))
 		_buttons[i].mouse_entered.connect(SfxManager.play_click)
+		_buttons[i].mouse_entered.connect(_show_info.bind(i))
+		_buttons[i].focus_entered.connect(_show_info.bind(i))
+		_buttons[i].mouse_exited.connect(_show_summary)
 
 	_prev = _make_arrow("<", Vector2(30, 90))
 	_next = _make_arrow(">", Vector2(270, 90))
@@ -83,10 +89,41 @@ func _refresh() -> void:
 		var earned := Progress.stars_for(level)
 		for star in 3:
 			_buttons[i].get_node("Stars/Star%d" % (star + 1)).self_modulate.a = 1.0 if star < earned else 0.275
+		_buttons[i].modulate = DONE_TINT if Progress.is_completed(level) else Color.WHITE
 	_prev.disabled = page == 0
 	_next.disabled = page >= pages - 1
-	_page_label.text = "Page %d / %d" % [page + 1, pages]
-	$Subtitle.text = PAGE_SUBTITLES[mini(page, PAGE_SUBTITLES.size() - 1)]
+	$Subtitle.text = CHAPTERS[mini(page, CHAPTERS.size() - 1)]
+	_show_summary()
+
+
+func _show_summary() -> void:
+	var earned := 0
+	var done := 0
+	for i in PAGE_SIZE:
+		var level := page * PAGE_SIZE + i + 1
+		earned += Progress.stars_for(level)
+		done += 1 if Progress.is_completed(level) else 0
+	_page_label.text = "%d / %d finished   -   %d / %d stars   -   page %d / %d" % [done, PAGE_SIZE, earned, PAGE_SIZE * 3, page + 1, _page_count()]
+
+
+func _show_info(index: int) -> void:
+	var level := page * PAGE_SIZE + index + 1
+	if not ResourceLoader.exists(_level_path(level)):
+		return
+	var status := "%d / 3 stars" % Progress.stars_for(level) if Progress.is_completed(level) else "not finished yet"
+	_page_label.text = "Level %d  -  %s   -   %s" % [level, _level_name(level), status]
+
+
+func _level_name(level: int) -> String:
+	if _names.has(level):
+		return _names[level]
+	var state := (load(_level_path(level)) as PackedScene).get_state()
+	var name := ""
+	for i in state.get_node_property_count(0):
+		if state.get_node_property_name(0, i) == "metadata/level_name":
+			name = str(state.get_node_property_value(0, i))
+	_names[level] = name
+	return name
 
 
 func _change_page(step: int) -> void:
