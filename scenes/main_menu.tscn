@@ -15,8 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://dmp7tledkmup5" path="res://assets/ui/dash.png" id="13_dash"]
 [ext_resource type="Script" uid="uid://qjjakk7cgq3c" path="res://scenes/astronaut.gd" id="15_7b55j"]
 [ext_resource type="Script" uid="uid://bc3cfuwnpmeoa" path="res://scripts/star_field.gd" id="90_star_field"]
-=======
-[ext_resource type="Script" uid="uid://bc3cfuwnpmeoa" path="res://scripts/star_field.gd" id="90_star_field"]
 [ext_resource type="Script" path="res://scripts/depth_parallax.gd" id="91_parallax"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_moon"]
