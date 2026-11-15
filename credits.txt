@@ -1,5 +1,10 @@
 MOONBOUNCE — CREDITS
 
+Created by
+- Alen Gevorgyan
+- David Ghazaryan
+- Koryun Gaboyan
+
 Art
 - Free Space Runner Pack by Matt Walkden (mattwalkden.itch.io) — CC0
   https://mattwalkden.itch.io/free-space-runner-pack
@@ -7,8 +12,8 @@ Art
   https://mattwalkden.itch.io/lunar-battle-pack
 - Moon crystal spikes: drawn by the team (palette from Space Runner's Diamond sprite)
 
-Music
-- (to add) e.g. Orbit by Florian Stracker — https://florianstracker.itch.io/orbit-free-ambient-video-game-music
+Soundtrack
+- Alen Gevorgyan
 
 Sound effects
 - (to add) made with jsfxr
