@@ -24,6 +24,8 @@ SettingsManager="*uid://bjpkr5apn6uk2"
 MusicManager="*uid://c2juti52w24mq"
 SfxManager="*uid://7iyle5q24rur"
 SceneHistory="*res://scripts/scene_history.gd"
+Progress="*res://scripts/progress.gd"
+ScreenFx="*res://scripts/screen_fx.gd"
 
 [display]
 

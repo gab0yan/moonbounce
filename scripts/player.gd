@@ -28,6 +28,7 @@ var _rope: Line2D
 signal launched(launch_velocity)
 signal died(death_position)
 signal bounced
+signal landed
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var aim_arc: Line2D = $AimArc
@@ -60,7 +61,7 @@ func _unhandled_input(event: InputEvent):
 		state = State.AIMING
 		_drag_start = get_global_mouse_position()
 		aim_arc.clear_points()
-		aim_arc.visible = true
+		aim_arc.visible = SettingsManager.show_aim_arc
 	elif event.is_action_released("launch") and state == State.AIMING:
 		aim_arc.visible = false
 		var v := _launch_velocity()
@@ -236,6 +237,7 @@ func _physics_process(delta: float) -> void:
 			state = State.IDLE
 			velocity = Vector2.ZERO
 			sprite.play("idle")
+			landed.emit()
 
 	if state == State.AIMING:
 		_update_arc()
@@ -276,7 +278,7 @@ func try_grapple() -> bool:
 	_anchor = best
 	_rope_length = maxf(best_dist, MIN_ROPE)
 	var n := (global_position - best.global_position).normalized()
-	velocity -= n * velocity.dot(n)   # keep only the sideways part of our speed
+	velocity -= n * velocity.dot(n)
 	state = State.SWINGING
 	_rope.visible = true
 	sprite.play("fly")
@@ -302,7 +304,7 @@ func _update_rope() -> void:
 	var off := global_position - _anchor.global_position
 	global_position = _anchor.global_position + off.normalized() * _rope_length
 	if is_on_floor():
-		release_grapple()     # touched the ground: let go
+		release_grapple()
 		return
 	sprite.flip_h = velocity.x < 0
 	_rope.points = PackedVector2Array([global_position + Vector2(0, -10), _anchor.global_position])

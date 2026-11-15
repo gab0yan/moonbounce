@@ -97,7 +97,7 @@ position = Vector2(256, 15)
 [node name="HintCrater" type="Node2D" parent="Hints" unique_id=995495608]
 position = Vector2(72, 52)
 script = ExtResource("23_hint")
-text = "Too far to jump? Leave bodies in the crater and hop across them."
+text = "Too far? Hop across bodies."
 width = 130.0
 
 [node name="Spawn" type="Marker2D" parent="." unique_id=361942540]
