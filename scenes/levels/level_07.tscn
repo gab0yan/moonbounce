@@ -77,7 +77,7 @@ position = Vector2(272, 48)
 [node name="HintPortal" type="Node2D" parent="Hints"]
 position = Vector2(8, 64)
 script = ExtResource("23_hint")
-text = "Fly into a portal to come out of its twin - with the same speed."
+text = "Portals keep your speed."
 width = 120.0
 
 [node name="Spawn" type="Marker2D" parent="." unique_id=1143884258]

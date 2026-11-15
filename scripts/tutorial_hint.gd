@@ -5,6 +5,8 @@ extends Node2D
 @export var width := 120.0
 @export var show_radius := 200.0
 
+const MAX_ALPHA := 0.85
+
 var _label: Label
 var _player: Node2D
 
@@ -12,9 +14,12 @@ var _player: Node2D
 func _ready() -> void:
 	var settings := LabelSettings.new()
 	settings.font_size = 8
-	settings.font_color = Color(0.92, 0.94, 1.0)
-	settings.outline_size = 2
-	settings.outline_color = Color(0.04, 0.05, 0.12)
+	settings.font_color = Color(0.7, 0.74, 0.9)
+	settings.outline_size = 1
+	settings.outline_color = Color(0.03, 0.04, 0.1, 0.55)
+	settings.shadow_size = 0
+	settings.shadow_color = Color(0.03, 0.04, 0.1, 0.35)
+	settings.shadow_offset = Vector2(0, 1)
 
 	_label = Label.new()
 	_label.text = text
@@ -33,5 +38,5 @@ func _process(delta: float) -> void:
 	if _player:
 		var center := global_position + _label.size * 0.5
 		if _player.global_position.distance_to(center) < show_radius:
-			target = 1.0
+			target = MAX_ALPHA
 	modulate.a = move_toward(modulate.a, target, delta * 3.0)

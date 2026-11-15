@@ -15,6 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://dmp7tledkmup5" path="res://assets/ui/dash.png" id="13_dash"]
 [ext_resource type="Script" uid="uid://qjjakk7cgq3c" path="res://scenes/astronaut.gd" id="15_7b55j"]
 [ext_resource type="Script" uid="uid://bc3cfuwnpmeoa" path="res://scripts/star_field.gd" id="90_star_field"]
+=======
+[ext_resource type="Script" uid="uid://bc3cfuwnpmeoa" path="res://scripts/star_field.gd" id="90_star_field"]
+[ext_resource type="Script" path="res://scripts/depth_parallax.gd" id="91_parallax"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_moon"]
 texture = ExtResource("5_moon")
@@ -125,9 +128,12 @@ grow_vertical = 2
 script = ExtResource("1_1ajci")
 
 [node name="Background" type="Node2D" parent="." unique_id=1575396758]
+script = ExtResource("91_parallax")
 
 [node name="Sky" type="ColorRect" parent="Background" unique_id=1829657048]
-offset_right = 320.0
+offset_left = -16.0
+offset_top = -8.0
+offset_right = 336.0
 offset_bottom = 180.0
 mouse_filter = 2
 color = Color(0.031, 0.055, 0.11, 1)
@@ -143,7 +149,8 @@ centered = false
 
 [node name="FarMountains" type="TextureRect" parent="Background" unique_id=816708810]
 offset_top = 92.0
-offset_right = 1280.0
+offset_left = -16.0
+offset_right = 1392.0
 offset_bottom = 220.0
 scale = Vector2(0.25, 0.25)
 mouse_filter = 2
@@ -153,7 +160,8 @@ stretch_mode = 1
 
 [node name="Craters" type="TextureRect" parent="Background" unique_id=1781496344]
 offset_top = 118.0
-offset_right = 1280.0
+offset_left = -16.0
+offset_right = 1392.0
 offset_bottom = 246.0
 scale = Vector2(0.25, 0.25)
 mouse_filter = 2
@@ -181,13 +189,13 @@ texture = ExtResource("7_tower")
 centered = false
 
 [node name="ExitCapsule" type="Sprite2D" parent="Scene" unique_id=1201748051]
-position = Vector2(266, 96)
+position = Vector2(273, 96)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("8_capsule")
 centered = false
 
 [node name="Sparkle" type="Sprite2D" parent="Scene" unique_id=1399697226]
-position = Vector2(288, 90)
+position = Vector2(294, 90)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("10_sparkle")
 centered = false

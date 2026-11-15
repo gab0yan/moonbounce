@@ -75,13 +75,13 @@ position = Vector2(272, 32)
 [node name="HintLaunch" type="Node2D" parent="Hints"]
 position = Vector2(8, 44)
 script = ExtResource("23_hint")
-text = "Hold left mouse, drag back and release to launch."
+text = "Drag back, release to launch."
 width = 130.0
 
 [node name="HintBodies" type="Node2D" parent="Hints"]
 position = Vector2(92, 84)
 script = ExtResource("23_hint")
-text = "Crystals are deadly... but your body stays behind. Bounce on it!"
+text = "Your body stays. Bounce on it!"
 width = 112.0
 
 [node name="Spawn" type="Marker2D" parent="." unique_id=242292091]

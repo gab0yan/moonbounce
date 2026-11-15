@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var area := Vector2(320, 192)
+@export var area := Vector2(352, 200)
 @export var fps := 2.5
 @export var frame_count := 20
 @export var frame_path := "res://stars/stars/stars%d.png"
@@ -26,9 +26,9 @@ func _ready() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
 
-	var y := -TILE.y * 0.5
+	var y := -TILE.y * 0.5 - 8.0
 	while y < area.y:
-		var x := -rng.randf_range(0.0, TILE.x)
+		var x := -16.0 - rng.randf_range(0.0, TILE.x)
 		while x < area.x:
 			var strip := AnimatedSprite2D.new()
 			strip.sprite_frames = frames

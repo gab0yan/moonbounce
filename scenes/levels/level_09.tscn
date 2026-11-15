@@ -126,7 +126,7 @@ position = Vector2(272, 96)
 [node name="HintWind" type="Node2D" parent="Hints"]
 position = Vector2(4, 52)
 script = ExtResource("23_hint")
-text = "Wind pushes you while you fly. Follow the arrows!"
+text = "Wind pushes you. Follow the arrows."
 width = 76.0
 
 [node name="Spawn" type="Marker2D" parent="." unique_id=802986020]
