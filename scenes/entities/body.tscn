@@ -14,6 +14,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
 position = Vector2(0, -8)
 texture = ExtResource("1_astronaut_bo")
 
@@ -30,6 +31,7 @@ position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_bounce")
 
 [node name="Dust" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
 visible = false
 position = Vector2(0, -12)
 texture = ExtResource("2_dust")

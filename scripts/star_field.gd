@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var area := Vector2(320, 192)
-@export var fps := 6.0
+@export var fps := 2.5
 @export var frame_count := 20
 @export var frame_path := "res://stars/stars/stars%d.png"
 
@@ -17,6 +17,9 @@ func _ready() -> void:
 	for i in range(1, frame_count + 1):
 		frames.add_frame("default", load(frame_path % i))
 
+	var tex_size: Vector2 = frames.get_frame_texture("default", 0).get_size()
+	var art_scale := TILE / tex_size
+
 	var mat := ShaderMaterial.new()
 	mat.shader = preload("res://assets/shaders/star_key.gdshader")
 
@@ -30,6 +33,7 @@ func _ready() -> void:
 			var strip := AnimatedSprite2D.new()
 			strip.sprite_frames = frames
 			strip.centered = false
+			strip.scale = art_scale
 			strip.material = mat
 			strip.flip_h = rng.randf() < 0.5
 			strip.flip_v = rng.randf() < 0.5

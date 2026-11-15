@@ -16,18 +16,20 @@ color = Color(0.031, 0.055, 0.110, 1.000)
 script = ExtResource("4_star_field")
 
 [node name="FarMountains" type="TextureRect" parent="."]
+scale = Vector2(0.25, 0.25)
 offset_top = 92.0
-offset_right = 320.0
-offset_bottom = 124.0
+offset_right = 1280.0
+offset_bottom = 220.0
 mouse_filter = 2
 texture = ExtResource("2_moon_surface")
 expand_mode = 1
 stretch_mode = 1
 
 [node name="Craters" type="TextureRect" parent="."]
+scale = Vector2(0.25, 0.25)
 offset_top = 118.0
-offset_right = 320.0
-offset_bottom = 150.0
+offset_right = 1280.0
+offset_bottom = 246.0
 mouse_filter = 2
 texture = ExtResource("3_moon_surface")
 expand_mode = 1
