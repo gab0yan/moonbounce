@@ -42,13 +42,8 @@ func _add_endless_button() -> void:
 	b.position = Vector2(234, 160)
 	b.size = Vector2(76, 16)
 	b.mouse_entered.connect(SfxManager.play_click)
-	if Progress.story_done():
-		b.text = "Endless" if Progress.best_round == 0 else "Endless (best %d)" % Progress.best_round
-		b.pressed.connect(_start_endless)
-	else:
-		b.text = "Endless (locked)"
-		b.disabled = true
-		b.tooltip_text = "Finish all 20 levels to unlock random rounds"
+	b.text = "Endless" if Progress.best_round == 0 else "Endless (best %d)" % Progress.best_round
+	b.pressed.connect(_start_endless)
 	add_child(b)
 
 
