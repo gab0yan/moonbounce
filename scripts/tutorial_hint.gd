@@ -1,12 +1,9 @@
-# Written with AI assistance (Claude).
-# A tutorial text placed in the level. It fades in when the player is nearby
-# and fades out when they move away, so it only shows up where it matters.
 class_name TutorialHint
 extends Node2D
 
 @export_multiline var text := ""
 @export var width := 120.0
-@export var show_radius := 200.0    # how close the player must be to see it
+@export var show_radius := 200.0
 
 var _label: Label
 var _player: Node2D

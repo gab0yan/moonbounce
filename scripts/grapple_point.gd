@@ -1,6 +1,3 @@
-# Written with AI assistance (Claude).
-# A grapple anchor floating in the air. The dashed ring shows its reach:
-# while you fly inside the ring, hold SPACE to attach a rope to the centre and swing.
 class_name GrapplePoint
 extends Node2D
 
@@ -31,13 +28,11 @@ func player_in_range() -> bool:
 func _draw() -> void:
 	var near := player_in_range()
 	var ring := Color(color, 0.85 if near else 0.3)
-	# dashed outer ring, slowly turning
 	var dashes := 28
 	for i in dashes:
 		if i % 2 == 0:
 			var a0 := TAU * i / dashes + _time * 0.4
 			draw_arc(Vector2.ZERO, radius, a0, a0 + TAU / dashes, 3, ring, 1.0)
-	# glowing core, pulses faster when you can grab it
 	var pulse := 0.5 + 0.5 * sin(_time * (8.0 if near else 3.0))
 	draw_circle(Vector2.ZERO, 4.0 + pulse, Color(color, 0.35))
 	draw_circle(Vector2.ZERO, 2.0, Color(1, 1, 1, 0.95))

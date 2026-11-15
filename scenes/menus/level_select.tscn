@@ -72,7 +72,6 @@ text = "2"
 
 [node name="Level03" parent="LevelPanel/Grid" unique_id=1814141684 instance=ExtResource("5_level_button")]
 layout_mode = 2
-disabled = true
 text = "3"
 
 [node name="Level04" parent="LevelPanel/Grid" unique_id=2027421804 instance=ExtResource("5_level_button")]
@@ -81,32 +80,26 @@ text = "4"
 
 [node name="Level05" parent="LevelPanel/Grid" unique_id=1750587976 instance=ExtResource("5_level_button")]
 layout_mode = 2
-disabled = true
 text = "5"
 
 [node name="Level06" parent="LevelPanel/Grid" unique_id=363469392 instance=ExtResource("5_level_button")]
 layout_mode = 2
-disabled = true
 text = "6"
 
 [node name="Level07" parent="LevelPanel/Grid" unique_id=2143659556 instance=ExtResource("5_level_button")]
 layout_mode = 2
-disabled = true
 text = "7"
 
 [node name="Level08" parent="LevelPanel/Grid" unique_id=201185193 instance=ExtResource("5_level_button")]
 layout_mode = 2
-disabled = true
 text = "8"
 
 [node name="Level09" parent="LevelPanel/Grid" unique_id=2010371814 instance=ExtResource("5_level_button")]
 layout_mode = 2
-disabled = true
 text = "9"
 
 [node name="Level10" parent="LevelPanel/Grid" unique_id=398920041 instance=ExtResource("5_level_button")]
 layout_mode = 2
-disabled = true
 text = "10"
 
 [node name="BackButton" type="Button" parent="." unique_id=254982898]

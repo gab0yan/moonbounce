@@ -11,23 +11,23 @@ var arc_step := 0.06
 var bounce_speed := 210.0
 var cling_cooldown_time := 0.2
 
-enum State { IDLE, AIMING, DEAD, FLYING, CLINGING, SWINGING }   # AI-assisted: SWINGING = hanging on a rope
+enum State { IDLE, AIMING, DEAD, FLYING, CLINGING, SWINGING }
 
 var state := State.IDLE
 var _drag_start := Vector2.ZERO
 var _spawn_position := Vector2.ZERO
 var _state_before_aim := State.IDLE
 var _cling_cooldown := 0.0
-var _cling_time := 0.0   # AI-assisted: how long we've been holding the wall
+var _cling_time := 0.0
 var _cling_walls: Array[ClingWall] = []
 var _lift_zones: Array[LiftZone] = []
-var _anchor: GrapplePoint = null   # AI-assisted: the grapple point we hang from
+var _anchor: GrapplePoint = null
 var _rope_length := 0.0
 var _rope: Line2D
 
 signal launched(launch_velocity)
 signal died(death_position)
-signal bounced   # AI-assisted: tells the level we bounced on a body
+signal bounced
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var aim_arc: Line2D = $AimArc
@@ -81,8 +81,6 @@ func _can_start_aim() -> bool:
 		return true
 	return false
 
-
-# NEW
 func _cancel_aim() -> void:
 	state = _state_before_aim
 	aim_arc.visible = false
@@ -196,22 +194,22 @@ func _physics_process(delta: float) -> void:
 			sprite.play("idle")
 
 	if state == State.SWINGING:
-		velocity.y += SWING_GRAVITY * delta   # stronger pull on the rope = faster, punchier swings
+		velocity.y += SWING_GRAVITY * delta
 		var n := (global_position - _anchor.global_position).normalized()
-		velocity -= n * velocity.dot(n)          # stiff rope: you can only move around the circle
-		var t := Vector2(-n.y, n.x)              # direction along the circle
+		velocity -= n * velocity.dot(n)
+		var t := Vector2(-n.y, n.x)
 		var along := velocity.dot(t)
-		if absf(along) < SWING_MIN_SPEED:        # always swing at least this fast
+		if absf(along) < SWING_MIN_SPEED:
 			var dir := signf(along)
 			if dir == 0.0:
 				dir = (1.0 if t.x >= 0.0 else -1.0) * (-1.0 if sprite.flip_h else 1.0)
 			velocity = t * dir * SWING_MIN_SPEED
 	elif _is_sliding_on_wall():
 		_cling_time += delta
-		velocity = Vector2(0.0, _cling_walls[0].slide_speed_after(_cling_time))   # slides faster and faster
+		velocity = Vector2(0.0, _cling_walls[0].slide_speed_after(_cling_time))
 	elif not _lift_zones.is_empty() and (state != State.IDLE or _lift_zones[0].lifts_up()):
 		var zone := _lift_zones[0]
-		velocity = zone.push(velocity, delta, gravity)   # the zone decides the direction
+		velocity = zone.push(velocity, delta, gravity)
 		if state == State.IDLE:
 			state = State.FLYING
 			sprite.play("fly")
@@ -243,9 +241,6 @@ func _physics_process(delta: float) -> void:
 		_update_arc()
 
 
-# --- Grapple rope (written with AI assistance) ---
-# While flying inside a grapple point's ring, hold SPACE: a rope attaches to its centre
-# and you swing around it. Let go of SPACE to fly off with your swing speed.
 const GRAPPLE_ACTION := "grapple"
 const MIN_ROPE := 12.0
 const SWING_GRAVITY := 450.0
@@ -261,7 +256,7 @@ func _setup_grapple() -> void:
 	_rope = Line2D.new()
 	_rope.width = 1.0
 	_rope.default_color = Color(0.85, 0.95, 1.0)
-	_rope.top_level = true      # drawn in world space, not moving with the player
+	_rope.top_level = true
 	_rope.visible = false
 	add_child(_rope)
 
