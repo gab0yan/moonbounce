@@ -64,7 +64,7 @@ position = Vector2(224, 64)
 [node name="Hint1" type="Node2D" parent="Hints"]
 position = Vector2(16, 70)
 script = ExtResource("14_hint")
-text = "Jump from wall to wall to climb the chimney."
+text = "Wall-jump up the chimney."
 width = 110.0
 
 [node name="Spawn" type="Marker2D" parent="."]

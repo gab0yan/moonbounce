@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://b1n6uifeovfca"]
 
 [ext_resource type="Script" uid="uid://cvk1ik0w7e737" path="res://scripts/main_menu.gd" id="1_1ajci"]
-[ext_resource type="Texture2D" uid="uid://bdiylqipvr2sd" path="res://assets/backgrounds/stars.png" id="1_stars"]
 [ext_resource type="Texture2D" uid="uid://4b8nns6mm8qk" path="res://assets/props/earth.png" id="2_earth"]
 [ext_resource type="Texture2D" uid="uid://c4qh5wy5bw7kh" path="res://assets/backgrounds/moon_surface_layer1.png" id="3_layer1"]
 [ext_resource type="Texture2D" uid="uid://o0c8q1s8ekmg" path="res://assets/backgrounds/moon_surface_layer2.png" id="4_layer2"]
@@ -14,11 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://bav1f6ufxrbm8" path="res://assets/sprites/player/astronaut_body.png" id="11_body"]
 [ext_resource type="Texture2D" uid="uid://dvfsb3kcwuoxb" path="res://assets/sprites/player/astronaut_jump.png" id="12_jump"]
 [ext_resource type="Texture2D" uid="uid://dmp7tledkmup5" path="res://assets/ui/dash.png" id="13_dash"]
-[ext_resource type="Script" path="res://scripts/star_field.gd" id="90_star_field"]
+[ext_resource type="Script" uid="uid://bc3cfuwnpmeoa" path="res://scripts/star_field.gd" id="90_star_field"]
+[ext_resource type="Script" path="res://scripts/depth_parallax.gd" id="91_parallax"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_moon"]
-texture_region_size = Vector2i(64, 64)
 texture = ExtResource("5_moon")
+texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -125,9 +125,12 @@ grow_vertical = 2
 script = ExtResource("1_1ajci")
 
 [node name="Background" type="Node2D" parent="." unique_id=1575396758]
+script = ExtResource("91_parallax")
 
 [node name="Sky" type="ColorRect" parent="Background" unique_id=1829657048]
-offset_right = 320.0
+offset_left = -16.0
+offset_top = -8.0
+offset_right = 336.0
 offset_bottom = 180.0
 mouse_filter = 2
 color = Color(0.031, 0.055, 0.11, 1)
@@ -136,26 +139,28 @@ color = Color(0.031, 0.055, 0.11, 1)
 script = ExtResource("90_star_field")
 
 [node name="Earth" type="Sprite2D" parent="Background" unique_id=1453984525]
-scale = Vector2(0.25, 0.25)
 position = Vector2(270, 12)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_earth")
 centered = false
 
 [node name="FarMountains" type="TextureRect" parent="Background" unique_id=816708810]
-scale = Vector2(0.25, 0.25)
 offset_top = 92.0
-offset_right = 1280.0
+offset_left = -16.0
+offset_right = 1392.0
 offset_bottom = 220.0
+scale = Vector2(0.25, 0.25)
 mouse_filter = 2
 texture = ExtResource("3_layer1")
 expand_mode = 1
 stretch_mode = 1
 
 [node name="Craters" type="TextureRect" parent="Background" unique_id=1781496344]
-scale = Vector2(0.25, 0.25)
 offset_top = 118.0
-offset_right = 1280.0
+offset_left = -16.0
+offset_right = 1392.0
 offset_bottom = 246.0
+scale = Vector2(0.25, 0.25)
 mouse_filter = 2
 texture = ExtResource("4_layer2")
 expand_mode = 1
@@ -169,40 +174,40 @@ tile_map_data = PackedByteArray("AAAAAAkAAAABAAAAAAAAAAoAAAAFAAAAAAAAAAsAAAAHAAA
 tile_set = SubResource("TileSet_moon")
 
 [node name="CrystalSpikes" type="Sprite2D" parent="Scene" unique_id=157140864]
-scale = Vector2(0.25, 0.25)
 position = Vector2(144, 144)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("6_spikes")
 centered = false
 
 [node name="AntennaTower" type="Sprite2D" parent="Scene" unique_id=835577415]
-scale = Vector2(0.25, 0.25)
 position = Vector2(224, 96)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("7_tower")
 centered = false
 
 [node name="ExitCapsule" type="Sprite2D" parent="Scene" unique_id=1201748051]
+position = Vector2(273, 96)
 scale = Vector2(0.25, 0.25)
-position = Vector2(266, 96)
 texture = ExtResource("8_capsule")
 centered = false
 
 [node name="Sparkle" type="Sprite2D" parent="Scene" unique_id=1399697226]
+position = Vector2(294, 90)
 scale = Vector2(0.25, 0.25)
-position = Vector2(288, 90)
 texture = ExtResource("10_sparkle")
 centered = false
 hframes = 8
 frame = 2
 
 [node name="FuelTank" type="Sprite2D" parent="Scene" unique_id=197642765]
-scale = Vector2(0.25, 0.25)
 position = Vector2(298, 103)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("9_tank")
 centered = false
 
 [node name="Body" type="Sprite2D" parent="Scene" unique_id=1029095768]
-scale = Vector2(0.25, 0.25)
 position = Vector2(162, 146)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("11_body")
 centered = false
 
@@ -215,9 +220,9 @@ texture = ExtResource("13_dash")
 texture_mode = 1
 
 [node name="Astronaut" type="Sprite2D" parent="Scene" unique_id=1651660090]
-scale = Vector2(0.25, 0.25)
 position = Vector2(244, 70)
 rotation = -0.314
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("12_jump")
 hframes = 5
 frame = 1

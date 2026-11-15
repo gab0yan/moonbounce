@@ -66,7 +66,7 @@ position = Vector2(240, 64)
 [node name="HintDeadWeight" type="Node2D" parent="Hints"]
 position = Vector2(8, 56)
 script = ExtResource("23_hint")
-text = "Wall too high? Fall on the crystal on purpose - your body becomes a trampoline."
+text = "Too high? Die on the crystal first."
 width = 140.0
 
 [node name="Spawn" type="Marker2D" parent="." unique_id=1807682976]

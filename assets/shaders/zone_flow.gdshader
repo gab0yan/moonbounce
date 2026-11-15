@@ -23,7 +23,7 @@ void fragment() {
 	float lane = floor(across / 4.0);
 	float r = hash(lane);
 	float dash = step(mod(along - TIME * speed * (1.6 + r) + r * 97.0, 46.0), 5.0);
-	float thin = step(mod(across, 4.0), 0.5);          // only 1 px wide
+	float thin = step(mod(across, 4.0), 0.5);
 	float streak = step(0.55, r) * dash * thin;
 
 	vec2 edge = min(UV, 1.0 - UV) * px_size;

@@ -78,6 +78,12 @@ position = Vector2(272, 128)
 
 [node name="Hints" type="Node2D" parent="."]
 
+[node name="HintLastLight" type="Node2D" parent="Hints"]
+position = Vector2(8, 40)
+script = ExtResource("14_hint")
+text = "Leave a body, then climb."
+width = 92.0
+
 [node name="Spawn" type="Marker2D" parent="."]
 position = Vector2(24, 160)
 

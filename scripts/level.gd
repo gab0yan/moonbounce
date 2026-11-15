@@ -18,11 +18,12 @@ func _update_lives_label() -> void:
 	
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	lives = get_meta("lives", 3)
 	level_number = int(scene_file_path.get_file().get_basename().right(2))
-	level_name_label.text = "Level %d - %s" % [level_number, get_meta("level_name", "")]
+	if has_meta("round"):
+		level_number = get_meta("round")
+	level_name_label.text = "%s %d - %s" % [get_meta("number_label", "Level"), level_number, get_meta("level_name", "")]
 	_update_lives_label()
 	
 	level_complete.get_node("Center/Panel/Rows/NextLevelButton").pressed.connect(_on_next_level_pressed)
@@ -41,6 +42,13 @@ func _ready() -> void:
 	$HUD/Root/PauseButton.pressed.connect(_on_pause_button_pressed)
 	_setup_darkness()
 	player.bounced.connect(_on_player_bounced)
+	player.bounced.connect(_spawn_dust)
+	player.landed.connect(_spawn_dust)
+	var fx = preload("res://scripts/level_fx.gd").new()
+	fx.level = self
+	add_child(fx)
+	if not has_meta("round") and Story.should_play(level_number):
+		Cutscene.play(get_tree(), Story.logs_for(level_number), "LOG %02d" % level_number)
 	player.launched.connect(func(_v): _reset_bounces())
 
 
@@ -62,7 +70,6 @@ func _setup_darkness() -> void:
 	dark_material.shader = preload("res://assets/shaders/darkness.gdshader")
 	rect.material = dark_material
 	layer.add_child(rect)
-	# tutorial texts stay readable above the darkness
 	if has_node("Hints"):
 		var hint_layer := CanvasLayer.new()
 		hint_layer.layer = 5
@@ -81,7 +88,7 @@ func _update_darkness() -> void:
 	var lights := PackedVector3Array()
 	lights.append(Vector3(player.global_position.x, player.global_position.y - 9.0, get_meta("light_radius", 44.0)))
 	for point in get_tree().get_nodes_in_group("grapple_points"):
-		lights.append(Vector3(point.global_position.x, point.global_position.y, 14.0))   # grapple points glow
+		lights.append(Vector3(point.global_position.x, point.global_position.y, 14.0))
 	for body in $Bodies.get_children():
 		if lights.size() >= MAX_LIGHTS:
 			break
@@ -93,7 +100,7 @@ func _update_darkness() -> void:
 	dark_material.set_shader_parameter("light_count", count)
 
 func _show_level_intro() -> void:
-	var level_title := "Level %d - %s" % [level_number, get_meta("level_name", "")]
+	var level_title := "%s %d - %s" % [get_meta("number_label", "Level"), level_number, get_meta("level_name", "")]
 	level_name_label.visible = false
 	$PauseMenu.get_node("Center/Panel/Rows/Subtitle").text = level_title
 
@@ -115,7 +122,7 @@ func _show_level_intro() -> void:
 	rows.add_theme_constant_override("separation", 0)
 	rows.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	card.add_child(rows)
-	rows.add_child(_intro_label("LEVEL %d" % level_number, &"SmallLabel"))
+	rows.add_child(_intro_label("%s %d" % [str(get_meta("number_label", "Level")).to_upper(), level_number], &"SmallLabel"))
 	rows.add_child(_intro_label(str(get_meta("level_name", "")), &"TitleLabel"))
 	rows.add_child(_intro_label("%d lives" % lives, &"SmallLabel"))
 
@@ -188,6 +195,11 @@ func _reset_bounces() -> void:
 func _physics_process(_delta: float) -> void:
 	if bounce_count > 0 and player.state in [player.State.IDLE, player.State.CLINGING]:
 		_reset_bounces()
+	var dead: bool = player.state == player.State.DEAD
+	if dead and not _was_dead:
+		_shake()
+	_was_dead = dead
+	_update_checkpoint()
 
 func _on_player_died(death_position):
 	var body := BODY_SCENE.instantiate()
@@ -206,6 +218,7 @@ func _on_exit_body_entered(body):
 	if body != player or finished:
 		return
 	finished = true
+	_on_level_finished()
 	level_complete.get_node("Center/Panel/Rows/LivesLeftLabel").text = "Lives left: %d" % lives
 	var stars := level_complete.get_node("Center/Panel/Rows/Stars").get_children()
 	for i in stars.size():
@@ -225,6 +238,10 @@ func _next_level_path():
 	return "res://scenes/levels/level_%02d.tscn" % (level_number + 1)
 	
 func _on_next_level_pressed():
+	if level_number == Story.LOGS.size() and not has_meta("round"):
+		level_complete.visible = false
+		Cutscene.play(get_tree(), Story.ENDING, "FINAL LOG", _go_to_level_select)
+		return
 	get_tree().paused = false
 	if ResourceLoader.exists(_next_level_path()):
 		get_tree().change_scene_to_file(_next_level_path())
@@ -239,7 +256,67 @@ func _go_to_level_select():
 		
 
 
-# AI-assisted: the pause button in the top-right corner opens the same menu as Esc.
 func _on_pause_button_pressed() -> void:
 	if not get_tree().paused:
 		$PauseMenu._open()
+
+
+func _on_level_finished() -> void:
+	Progress.mark_completed(level_number, lives)
+
+
+const DUST_TEXTURE := preload("res://assets/sprites/effects/dust.png")
+const DUST_FRAMES := 8
+const SHAKE_STRENGTH := 3.0
+const SHAKE_STEPS := 6
+
+var _was_dead := false
+var _shake_tween: Tween
+
+
+func _update_checkpoint() -> void:
+	if player.state != player.State.IDLE or not player.is_on_floor():
+		return
+	for i in player.get_slide_collision_count():
+		var collider = player.get_slide_collision(i).get_collider()
+		if collider and collider.is_in_group("checkpoints"):
+			var point: Vector2 = collider.get_node("RespawnPoint").global_position
+			if player._spawn_position != point:
+				player._spawn_position = point
+				collider.modulate = Color(0.6, 1.0, 0.75)
+
+
+func _spawn_dust() -> void:
+	var dust := Sprite2D.new()
+	dust.texture = DUST_TEXTURE
+	dust.hframes = DUST_FRAMES
+	dust.scale = Vector2(0.25, 0.25)
+	dust.position = player.global_position + Vector2(0, -16)
+	add_child(dust)
+	var tween := create_tween()
+	tween.tween_property(dust, "frame", DUST_FRAMES - 1, 0.35)
+	tween.tween_callback(dust.queue_free)
+
+
+func _shake() -> void:
+	if not SettingsManager.screen_shake:
+		return
+	if _shake_tween:
+		_shake_tween.kill()
+	_shake_tween = create_tween()
+	for i in SHAKE_STEPS:
+		var offset := Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)) * SHAKE_STRENGTH
+		_shake_tween.tween_callback(_set_shake.bind(offset))
+		_shake_tween.tween_interval(0.04)
+	_shake_tween.tween_callback(_set_shake.bind(Vector2.ZERO))
+
+
+func _set_shake(offset: Vector2) -> void:
+	var transform := get_viewport().canvas_transform
+	transform.origin = offset
+	get_viewport().canvas_transform = transform
+
+
+func _exit_tree() -> void:
+	if is_inside_tree():
+		_set_shake(Vector2.ZERO)
