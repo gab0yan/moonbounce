@@ -177,9 +177,26 @@ func _update_arc() -> void:
 	if v == Vector2.ZERO:
 		return
 	sprite.flip_h = v.x < 0
-	for i in arc_points:
+	var shape_node: CollisionShape2D = $Collision
+	var query := PhysicsShapeQueryParameters2D.new()
+	query.shape = shape_node.shape
+	query.collision_mask = collision_mask
+	query.exclude = [get_rid()]
+	var start := shape_node.global_transform.translated(Vector2(0, -1))
+	var space := get_world_2d().direct_space_state
+	var prev := Vector2.ZERO
+	aim_arc.add_point(prev)
+	for i in range(1, arc_points):
 		var t := i * arc_step
-		aim_arc.add_point(v * t + Vector2(0.0, 0.5 * gravity * t * t))
+		var point := v * t + Vector2(0.0, 0.5 * gravity * t * t)
+		query.transform = start.translated(prev)
+		query.motion = point - prev
+		var hit := space.cast_motion(query)
+		if hit[0] < 1.0:
+			aim_arc.add_point(prev + (point - prev) * hit[0])
+			break
+		aim_arc.add_point(point)
+		prev = point
 
 
 func _physics_process(delta: float) -> void:

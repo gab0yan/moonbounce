@@ -57,7 +57,7 @@ horizontal_alignment = 1
 
 [node name="Line2" type="Label" parent="CreditsPanel/Lines" unique_id=160756760]
 layout_mode = 2
-text = "Your team names here"
+text = "Alen Gevorgyan, David Ghazaryan & Koryun Gaboyan"
 horizontal_alignment = 1
 
 [node name="Line3" type="Label" parent="CreditsPanel/Lines" unique_id=1809961958]
@@ -85,7 +85,7 @@ horizontal_alignment = 1
 
 [node name="Line7" type="Label" parent="CreditsPanel/Lines" unique_id=1982138867]
 layout_mode = 2
-text = "Music: (to add)   Sound FX: jsfxr"
+text = "Soundtrack: Alen Gevorgyan   Sound FX: jsfxr"
 horizontal_alignment = 1
 
 [node name="Line8" type="Label" parent="CreditsPanel/Lines" unique_id=1809708341]
