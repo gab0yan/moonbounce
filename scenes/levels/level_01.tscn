@@ -17,7 +17,7 @@
 [node name="Level01" type="Node2D" unique_id=456542554]
 script = ExtResource("1_jmes4")
 metadata/level_name = "First Step"
-metadata/lives = 3
+metadata/lives = 4
 
 [node name="SpaceBackground" parent="." unique_id=939843625 instance=ExtResource("1_space_backgr")]
 

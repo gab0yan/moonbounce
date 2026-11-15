@@ -17,7 +17,7 @@
 [node name="Level04" type="Node2D" unique_id=1741050067]
 script = ExtResource("1_tdc43")
 metadata/level_name = "Crater Hop"
-metadata/lives = 4
+metadata/lives = 5
 
 [node name="SpaceBackground" parent="." unique_id=1711773915 instance=ExtResource("2_03g8n")]
 
