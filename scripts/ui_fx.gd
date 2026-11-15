@@ -32,8 +32,6 @@ func _on_node_added(node: Node) -> void:
 	node.resized.connect(func(): node.pivot_offset = node.size * 0.5)
 	node.mouse_entered.connect(_grow.bind(node, true))
 	node.mouse_exited.connect(_grow.bind(node, false))
-	node.focus_entered.connect(_grow.bind(node, true))
-	node.focus_exited.connect(_grow.bind(node, false))
 	node.button_down.connect(_press.bind(node))
 
 
@@ -50,8 +48,6 @@ func _grow(node: BaseButton, on: bool) -> void:
 	if not is_instance_valid(node) or not node.is_inside_tree():
 		return
 	var target := Vector2.ONE * HOVER_SCALE if (on and not node.disabled) else Vector2.ONE
-	if not on and node.has_focus():
-		return
 	_tween_for(node).tween_property(node, "scale", target, 0.12).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 
@@ -59,7 +55,8 @@ func _press(node: BaseButton) -> void:
 	if node.disabled:
 		return
 	node.scale = Vector2.ONE * PRESS_SCALE
-	_tween_for(node).tween_property(node, "scale", Vector2.ONE * HOVER_SCALE, 0.2).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	var rest := Vector2.ONE * HOVER_SCALE if node.is_hovered() else Vector2.ONE
+	_tween_for(node).tween_property(node, "scale", rest, 0.2).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 
 
 func _input(event: InputEvent) -> void:
