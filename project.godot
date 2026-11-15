@@ -26,6 +26,7 @@ SfxManager="*uid://7iyle5q24rur"
 SceneHistory="*res://scripts/scene_history.gd"
 Progress="*res://scripts/progress.gd"
 ScreenFx="*res://scripts/screen_fx.gd"
+UiFx="*res://scripts/ui_fx.gd"
 
 [display]
 

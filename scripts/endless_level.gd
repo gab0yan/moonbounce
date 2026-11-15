@@ -52,7 +52,7 @@ var _zones: Array = []
 var _grapples: Array = []
 var _platforms: Array = []
 var _portals: Array = []
-var _deaths := 0
+var _death_pieces := 0
 var picks: Array = []
 
 
@@ -85,7 +85,7 @@ func _build_round() -> void:
 	set_meta("round", round_number)
 	set_meta("number_label", "Round")
 	set_meta("level_name", NAMES[_rng.randi() % NAMES.size()])
-	set_meta("lives", 3 + _deaths * 2)
+	set_meta("lives", 3 + _death_pieces * 2)
 	var dark := round_number >= 4 and not _last_dark and _rng.randf() < 0.25
 	_last_dark = dark
 	set_meta("dark", dark)
@@ -175,7 +175,7 @@ func _block(col: int, top_row: int, bottom_row: int, ch := "#") -> void:
 func _piece_pit(x: int, w: int, g: int) -> int:
 	_fill_ground(x, x + w - 1, g)
 	_spikes(x + 1, x + w - 2, g)
-	_deaths += 1
+	_death_pieces += 1
 	return g
 
 
@@ -195,7 +195,7 @@ func _piece_wall(x: int, w: int, g: int) -> int:
 	if w >= 7 and _rng.randf() < 0.5:
 		_block(wall + 1, g - h, g - 1)
 		_grid[g - h - 1][wall + 1] = "^"
-	_deaths += 1
+	_death_pieces += 1
 	return g
 
 
@@ -205,7 +205,7 @@ func _piece_deadweight(x: int, w: int, g: int) -> int:
 	_spikes(x + 2, x + 2, g)
 	for c in range(x + 3, x + w - 1):
 		_block(c, g - h, g - 1)
-	_deaths += 1
+	_death_pieces += 1
 	return g
 
 
