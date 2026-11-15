@@ -38,6 +38,7 @@ func _ready() -> void:
 	_add_map_boundaries()
 	_add_bounce_hint()
 	_show_level_intro()
+	$HUD/Root/PauseButton.pressed.connect(_on_pause_button_pressed)
 	_setup_darkness()
 	player.bounced.connect(_on_player_bounced)
 	player.launched.connect(func(_v): _reset_bounces())
@@ -109,7 +110,7 @@ func _show_level_intro() -> void:
 	card.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	var band := ColorRect.new()
-	band.color = Color(0.03, 0.04, 0.1, 0.75)
+	band.color = Color(0.03, 0.04, 0.1, 0.92)
 	band.position = Vector2(0, 62)
 	band.size = Vector2(MAP_SIZE.x, 54)
 	band.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -250,3 +251,9 @@ func _go_to_level_select():
 	
 	
 		
+
+
+# AI-assisted: the pause button in the top-right corner opens the same menu as Esc.
+func _on_pause_button_pressed() -> void:
+	if not get_tree().paused:
+		$PauseMenu._open()

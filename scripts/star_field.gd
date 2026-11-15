@@ -1,25 +1,24 @@
-# Written with AI assistance (Claude).
-# Fills the sky with the animated star strips from res://stars/stars/.
-# Every strip starts on a random frame, twinkles at a slightly different speed,
-# and is placed a little out of line with its neighbours so the sky looks less tiled.
 extends Node2D
 
-@export var area := Vector2(320, 192)   # how much sky to cover
-@export var fps := 6.0                    # base animation speed
+@export var area := Vector2(320, 192)
+@export var fps := 2.5
 @export var frame_count := 20
 @export var frame_path := "res://stars/stars/stars%d.png"
 
-const TILE := Vector2(112, 16)            # size of one star strip
+const TILE := Vector2(112, 16)
 
 
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS   # keep twinkling in the pause menu
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 	var frames := SpriteFrames.new()
 	frames.set_animation_speed("default", fps)
 	frames.set_animation_loop("default", true)
 	for i in range(1, frame_count + 1):
 		frames.add_frame("default", load(frame_path % i))
+
+	var tex_size: Vector2 = frames.get_frame_texture("default", 0).get_size()
+	var art_scale := TILE / tex_size
 
 	var mat := ShaderMaterial.new()
 	mat.shader = preload("res://assets/shaders/star_key.gdshader")
@@ -29,11 +28,12 @@ func _ready() -> void:
 
 	var y := -TILE.y * 0.5
 	while y < area.y:
-		var x := -rng.randf_range(0.0, TILE.x)        # each row starts at a different spot
+		var x := -rng.randf_range(0.0, TILE.x)
 		while x < area.x:
 			var strip := AnimatedSprite2D.new()
 			strip.sprite_frames = frames
 			strip.centered = false
+			strip.scale = art_scale
 			strip.material = mat
 			strip.flip_h = rng.randf() < 0.5
 			strip.flip_v = rng.randf() < 0.5

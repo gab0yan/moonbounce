@@ -8,63 +8,63 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_death0"]
 atlas = ExtResource("3_astronaut_de")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_death1"]
 atlas = ExtResource("3_astronaut_de")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_death2"]
 atlas = ExtResource("3_astronaut_de")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_death3"]
 atlas = ExtResource("3_astronaut_de")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(384, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fly0"]
 atlas = ExtResource("2_astronaut_ju")
-region = Rect2(0, 0, 24, 24)
+region = Rect2(0, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fly1"]
 atlas = ExtResource("2_astronaut_ju")
-region = Rect2(24, 0, 24, 24)
+region = Rect2(96, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fly2"]
 atlas = ExtResource("2_astronaut_ju")
-region = Rect2(48, 0, 24, 24)
+region = Rect2(192, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fly3"]
 atlas = ExtResource("2_astronaut_ju")
-region = Rect2(72, 0, 24, 24)
+region = Rect2(288, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fly4"]
 atlas = ExtResource("2_astronaut_ju")
-region = Rect2(96, 0, 24, 24)
+region = Rect2(384, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_idle0"]
 atlas = ExtResource("1_astronaut_id")
-region = Rect2(0, 0, 24, 24)
+region = Rect2(0, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_idle1"]
 atlas = ExtResource("1_astronaut_id")
-region = Rect2(24, 0, 24, 24)
+region = Rect2(96, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_idle2"]
 atlas = ExtResource("1_astronaut_id")
-region = Rect2(48, 0, 24, 24)
+region = Rect2(192, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_idle3"]
 atlas = ExtResource("1_astronaut_id")
-region = Rect2(72, 0, 24, 24)
+region = Rect2(288, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_idle4"]
 atlas = ExtResource("1_astronaut_id")
-region = Rect2(96, 0, 24, 24)
+region = Rect2(384, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_idle5"]
 atlas = ExtResource("1_astronaut_id")
-region = Rect2(120, 0, 24, 24)
+region = Rect2(480, 0, 96, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_player"]
 animations = [{
@@ -138,6 +138,7 @@ collision_mask = 5
 script = ExtResource("0_player_script")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1395132334]
+scale = Vector2(0.25, 0.25)
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_player")
 animation = &"idle"
